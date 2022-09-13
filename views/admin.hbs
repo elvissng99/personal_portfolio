@@ -1,0 +1,21 @@
+<div>
+    {{#if experiences.length}}
+        <table border="1">
+            <caption>Experiences</caption>
+            <tbody>
+                {{#each experiences}}
+                <tr>
+                    <td>{{title}}</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+    <div>
+        <p>NO DATA</p>
+    </div>
+        
+    {{/if}}
+</div>
