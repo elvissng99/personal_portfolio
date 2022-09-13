@@ -1,3 +1,7 @@
-{{#each experiences}}
-    {{>experience_form}}
-{{/each}}
+<div>
+    {{#each experiences}}
+    <form method="POST" action="/editExperience/{{id}}">
+            {{>experience_form}}
+    </form>
+    {{/each}}
+</div>
