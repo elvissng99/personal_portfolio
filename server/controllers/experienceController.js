@@ -86,10 +86,10 @@ exports.update = (req,res)=>{
         connection.query('UPDATE experiences SET title = ?, description = ? WHERE id = ?',[title,description,req.params.id],(err, experiences)=>{
             if(!err){
                 console.log("edited experience")
-                connection.query('SELECT * FROM experiences;',(err, experiences)=>{
+                connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
                     connection.release()
                     if(!err){
-                        res.render('admin',{experiences})
+                        res.render('editExperience',{experiences})
                     }else{
                         console.log(err)
                     }
@@ -112,6 +112,29 @@ exports.view = (req,res)=>{
             connection.release()
             if(!err){
                 res.render('viewExperience',{experiences})
+            }else{
+                console.log(err)
+            }
+        })
+    })
+}
+
+exports.delete = (req,res)=>{
+    console.log("delete experience")
+    pool.getConnection((err,connection)=>{
+        if(err) throw err
+        console.log("Connected as ID" + connection.threadId)
+        
+        connection.query('DELETE FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
+            if(!err){
+                connection.query('SELECT * FROM experiences;',(err, experiences)=>{
+                    connection.release()
+                    if(!err){
+                        res.render('admin',{experiences})
+                    }else{
+                        console.log(err)
+                    }
+                })
             }else{
                 console.log(err)
             }

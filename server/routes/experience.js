@@ -6,11 +6,12 @@ const expController = require("../controllers/experienceController")
 //create, find, update, delete
 router.get('/admin', expController.admin)
 router.get('/addExperience',expController.form)
+router.get('/deleteExperience/:id',expController.delete)
+
 router.post('/admin',expController.create)
 router.get("/editExperience/:id",expController.edit)
 router.post("/editExperience/:id",expController.update)
 router.get('/viewExperience/:id',expController.view)
-
 
 router.get('/', (req,res)=>{
     const context = {}
