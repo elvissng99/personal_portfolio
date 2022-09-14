@@ -6,8 +6,11 @@
                 {{#each experiences}}
                 <tr>
                     <td>{{title}}</td>
-                    <td>Edit</td>
-                    <td>Delete</td>
+                    <td>
+                        <a href="/viewExperience/{{id}}" type="button">View</a>
+                        <a href="/editExperience/{{id}}" type="button">Edit</a>
+                        <a href="/deleteExperience/{{id}}" type="button">Delete</a>
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -16,6 +19,8 @@
     <div>
         <p>NO DATA</p>
     </div>
-        
     {{/if}}
+    <div>
+        <a href="/addExperience" ><button>Add New Experience</button></a>
+    </div>
 </div>

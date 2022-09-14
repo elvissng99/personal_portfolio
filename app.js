@@ -1,44 +1,66 @@
 const express = require("express")
 const expressHandlebars = require('express-handlebars')
+const mysql = require("mysql")
+require("dotenv").config()
 const app = express()
+const port = 5000
 app.engine('hbs',expressHandlebars.engine({
     extname:".hbs",
 }))
+app.set('view engine', 'hbs')
 app.use(express.static("public"))
-const data = {
-    experiences: [
-        {
-            id:0,
-            title:"Company 1",
-            description:"work in company 1",
-        },
-        {
-            id:1,
-            title:"Company 2",
-            description:"work in company 2",
-        },
-        {
-            id:2,
-            title:"Company 3",
-            description:"work in company 3",
-        }
-    ]
-}
+app.use(express.urlencoded({
+    extended:false
+}))
 
-app.get('/', (req,res)=>{
-    const context = data
-    res.render('main.hbs',context)
+app.use(express.json())
+
+const pool = mysql.createPool({
+    connectionLimit : 100,
+    host: process.env.DB_HOST,
+    user : process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
 })
 
-app.get('/admin', (req,res)=>{
-    const context = data
-    context["layout"] = 'main'
-    res.render('admin.hbs',context)
+pool.getConnection((err,connection)=>{
+    if(err) throw err
+    console.log("Connected as ID" + connection.threadId)
 })
 
-app.get('/login', (req,res)=>{
-    const context = data
-    res.render('login.hbs',context)
-})
+const routes = require("./server/routes/experience")
+app.use('/',routes)
 
-app.listen(3000)
+// app.get('/', (req,res)=>{
+//     const context = data
+//     res.render('main',context)
+// })
+
+// app.get('/admin', (req,res)=>{
+//     const context = data
+//     res.render('admin',context)
+// })
+
+// app.get('/login', (req,res)=>{
+//     const context = data
+//     res.render('login',context)
+// })
+
+// app.get('/experiences', (req,res)=>{
+//     const context = data
+//     res.render('experiences',context)
+// })
+
+// app.get('/contact', (req,res)=>{
+//     const context = data
+//     res.render('contact',context)
+// })
+
+// app.get('/about', (req,res)=>{
+//     const context = data
+//     res.render('about',context)
+// })
+
+app.listen(port, ()=>{
+    console.log(`Listening on port ${port}`)
+})
