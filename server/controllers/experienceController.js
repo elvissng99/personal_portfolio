@@ -33,10 +33,13 @@ exports.admin = (req,res)=>{
 exports.login = (req,res)=>{
     const error = req.query.error;
     if (error == 1){
+        console.log("wrong credentials")
         res.render("login",{error:error})
+    }else{
+        console.log("login page")
+        res.render("login")
     }
-    console.log("login page")
-    res.render("login")
+    
     
 }
 
@@ -46,7 +49,7 @@ exports.validate = (req,res)=>{
     console.log("check password")
     if (email == "email@mail.com" && password =='Passpass11'){
         req.session.email = email
-        res.redirect('admin')
+        res.redirect('/admin')
     }else{
         res.redirect('/login/?error=1');
     }
