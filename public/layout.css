@@ -65,6 +65,8 @@ button:hover{
   flex-direction: column;
 }
 
+/* for main */
+
 .centrehead{
   padding-top: 100px;
   color: #67BEE5;
@@ -86,4 +88,28 @@ button:hover{
   padding-top: 10px;
   color: black;
   text-align: center;
+}
+
+/*for experience form */
+
+.Title{
+  padding-left: 400px;
+}
+
+.inputfields{
+  padding-top: 30px;
+  width: 500px;
+}
+
+.image-upload > input
+{
+    display: none;
+}
+
+.formbuttons{
+  text-align: right;
+}
+
+textarea{
+  width: 975px;
 }
