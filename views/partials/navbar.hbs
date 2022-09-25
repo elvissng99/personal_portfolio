@@ -2,10 +2,14 @@
     <img class="logo" src="/ES logo.jpg" alt="logo">
     <nav>
         <ul class = 'nav__links'>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Me</a></li>
-            <li><a href="#">Experiences</a></li>
-            <li><a href="#">Contact Me</a></li>
+            {{#if session.email}}
+                <li><a href="/admin">Home</a></li>
+            {{else}}
+                <li><a href="/">Home</a></li>
+            {{/if}}
+            
+            <li><a href="/about">About</a></li>
+            <li><a href="/resume">Resume</a></li>
         </ul>
     </nav>
     {{#if session.email}}

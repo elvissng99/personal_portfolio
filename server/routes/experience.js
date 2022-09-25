@@ -16,14 +16,14 @@ router.get("/editExperience/:id",expController.edit)
 router.post("/editExperience/:id",expController.update)
 router.get('/viewExperience/:id',expController.view)
 
-router.get('/', (req,res)=>{
-    const context = {}
-    res.render('main',context)
-})
+// router.get('/', (req,res)=>{
+//     const context = {}
+//     res.render('home',context)
+// })
 
-router.get('/admin', (req,res)=>{
-    const context = {}
-    res.render('admin',context)
-})
+// router.get('/admin', (req,res)=>{
+//     const context = {}
+//     res.render('admin',context)
+// })
 
 module.exports = router

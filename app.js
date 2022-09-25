@@ -38,8 +38,14 @@ pool.getConnection((err,connection)=>{
     console.log("Connected as ID" + connection.threadId)
 })
 
-const routes = require("./server/routes/experience")
-app.use('/',routes)
+const route_experience = require("./server/routes/experience")
+app.use('/',route_experience)
+
+const route_navigation = require("./server/routes/navigation")
+app.use('/',route_navigation)
+
+const route_about = require("./server/routes/about")
+app.use('/',route_about)
 
 // app.get('/', (req,res)=>{
 //     const context = data
