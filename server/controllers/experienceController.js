@@ -150,7 +150,7 @@ exports.view = (req,res)=>{
     pool.getConnection((err,connection)=>{
         if(err) throw err
         console.log("Connected as ID" + connection.threadId)
-        
+        console.log(req)
         connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
             connection.release()
             if(!err){

@@ -1,0 +1,12 @@
+<div>
+    <h3>My Journey into User Experience</h3>
+    {{#if about.length}}
+    <ul>
+        {{#each about}}
+        <li>{{description}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+    NO ABOUT DATA
+    {{/if}}
+</div>
