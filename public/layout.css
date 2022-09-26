@@ -7,7 +7,7 @@
   background-color: white;
 }
 
-li,a,button,div,input,textarea{
+li,a,div,input,textarea{
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -47,6 +47,11 @@ header{
 }
 
 button{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
   padding: 9px 25px;
   margin-left: 15px;
   background-color: #67BEE5;
