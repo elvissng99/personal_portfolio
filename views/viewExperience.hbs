@@ -3,5 +3,11 @@
         <p>{{title}}</p>
         <p>{{description}}</p>
     {{/each}}
-    <a href="/admin"><button>Back</button></a>
+    
+    {{#if session.email}}
+        <a href="/admin"><button>Back</button></a>
+    {{else}}
+        <a href="/"><button>Back</button></a>
+    {{/if}}
+    
 </div>

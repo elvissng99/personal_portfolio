@@ -1,0 +1,18 @@
+<div>
+    <form method="POST" action="">
+            <div>
+                <input name="email" type="email" placeholder="Enter Email">
+            </div>
+            <div>
+                <input name="password" type="password" placeholder="Enter Password">
+            </div>
+            <div>
+                <button type="submit">Login</button><a href="../"><button type="button">Back</button></a>
+            </div>
+            {{#if error}}
+                <div>
+                    WRONG WRONG WRONG
+                </div>
+            {{/if}}
+    </form>
+</div>

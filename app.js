@@ -2,6 +2,8 @@ const express = require("express")
 const expressHandlebars = require('express-handlebars')
 const mysql = require("mysql")
 require("dotenv").config()
+const session = require('express-session')
+const {v4:uuidv4}= require('uuid')
 const app = express()
 const port = 5000
 app.engine('hbs',expressHandlebars.engine({
@@ -14,7 +16,15 @@ app.use(express.urlencoded({
 }))
 
 app.use(express.json())
-
+app.use(session({
+    secret:uuidv4(),
+    resave:false,
+    saveUninitialized:true
+}))
+app.use(function (req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
 const pool = mysql.createPool({
     connectionLimit : 100,
     host: process.env.DB_HOST,
@@ -28,8 +38,14 @@ pool.getConnection((err,connection)=>{
     console.log("Connected as ID" + connection.threadId)
 })
 
-const routes = require("./server/routes/experience")
-app.use('/',routes)
+const route_experience = require("./server/routes/experience")
+app.use('/',route_experience)
+
+const route_navigation = require("./server/routes/navigation")
+app.use('/',route_navigation)
+
+const route_about = require("./server/routes/about")
+app.use('/',route_about)
 
 // app.get('/', (req,res)=>{
 //     const context = data

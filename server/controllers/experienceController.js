@@ -8,20 +8,63 @@ const pool = mysql.createPool({
 })
 
 
-
 exports.admin = (req,res)=>{
-    pool.getConnection((err,connection)=>{
-        if(err) throw err
-        console.log("Connected as ID" + connection.threadId)
-        console.log("admin view")
-        connection.query('SELECT * FROM experiences;',(err, experiences)=>{
-            connection.release()
-            if(!err){
-                res.render('admin',{experiences})
-            }else{
-                console.log(err)
-            }
+    if (req.session.email){
+        pool.getConnection((err,connection)=>{
+            if(err) throw err
+            console.log("Connected as ID" + connection.threadId)
+            console.log("admin view")
+            connection.query('SELECT * FROM experiences;',(err, experiences)=>{
+                connection.release()
+                if(!err){
+                    res.render('admin',{experiences})
+                }else{
+                    throw err
+                }
+            })
         })
+    }else{
+        res.redirect('/login')
+    }
+   
+    
+}
+
+exports.login = (req,res)=>{
+    const error = req.query.error;
+    if (error == 1){
+        console.log("wrong credentials")
+        res.render("login",{error:error})
+    }else{
+        console.log("login page")
+        res.render("login")
+    }
+    
+    
+}
+
+exports.validate = (req,res)=>{
+    const{email,password} = req.body
+    //currently using dummy email and password instead of checking from db
+    console.log("check password")
+    if (email == "email@mail.com" && password =='Passpass11'){
+        req.session.email = email
+        res.redirect('/admin')
+    }else{
+        res.redirect('/login/?error=1');
+    }
+    
+    
+}
+
+exports.logout = (req,res)=>{
+    console.log("logged out")
+    req.session.destroy(function(err){
+        if (err){
+            throw err
+        }else{
+            res.redirect("/login")
+        }
     })
     
 }
@@ -47,11 +90,11 @@ exports.create = (req,res)=>{
                     if(!err){
                         res.render('admin',{experiences})
                     }else{
-                        console.log(err)
+                        throw err
                     }
                 })
             }else{
-                console.log(err)
+                throw err
             }
         })
     })
@@ -69,7 +112,7 @@ exports.edit = (req,res)=>{
             if(!err){
                 res.render('editExperience',{experiences})
             }else{
-                console.log(err)
+                throw err
             }
         })
     })
@@ -91,11 +134,11 @@ exports.update = (req,res)=>{
                     if(!err){
                         res.render('editExperience',{experiences})
                     }else{
-                        console.log(err)
+                        throw err
                     }
                 })
             }else{
-                console.log(err)
+                throw err
             }
         })
     })
@@ -107,13 +150,13 @@ exports.view = (req,res)=>{
     pool.getConnection((err,connection)=>{
         if(err) throw err
         console.log("Connected as ID" + connection.threadId)
-        
+        console.log(req)
         connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
             connection.release()
             if(!err){
                 res.render('viewExperience',{experiences})
             }else{
-                console.log(err)
+                throw err
             }
         })
     })
@@ -132,11 +175,11 @@ exports.delete = (req,res)=>{
                     if(!err){
                         res.render('admin',{experiences})
                     }else{
-                        console.log(err)
+                        throw err
                     }
                 })
             }else{
-                console.log(err)
+                throw err
             }
         })
     })
