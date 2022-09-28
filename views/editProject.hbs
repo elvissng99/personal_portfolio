@@ -1,0 +1,24 @@
+<div>
+    <form method="POST" action="/editProject/{{id}}" enctype="multipart/form-data">
+        <div>
+            <input name="title" type="text" placeholder="Enter Title" value = "{{project.title}}">
+        </div>
+        <div>
+            <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{project.description}}</textarea>
+            {{#if errorMessages.length}}
+                {{#each errorMessages}}
+                    {{this}}
+                {{/each}}
+            {{/if}}
+        </div>
+        <div>
+            <img src="{{project.imagePath}}" alt="{{project.imagePath}}">
+        </div>
+        <div>
+            <input name='imagePath' type="file" >
+        </div>
+        <div>
+            <button type="submit">Submit</button><a href="../"><button type="button">Back</button></a><a href="/deleteProject/{{id}}"><button type = 'button' style="background-color: red; ">Delete</button></a>
+        </div>
+    </form>
+</div>

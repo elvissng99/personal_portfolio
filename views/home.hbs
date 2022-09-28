@@ -1,31 +1,42 @@
-<div>
-    {{#if home.length}}
-        {{#each home}}
+{{#if session.isLoggedIn}}
+    <div>
+        {{#if projects.length}}
+                <p><strong>My Projects</strong></p>
+                {{#each projects}}
+                    <a href = "/editProject/{{id}}"><img src="{{imagePath}}" alt="{{imagePath}}"></a>
+                    <p><strong>{{title}}</strong></p>
+                {{/each}}
+        {{else}}
         <div>
-            <h2>{{introduction}}{{name}}</h3>
-            <p>{{employment}}</p>
-            <p>{{description}}</p>
+            <p>NO DATA</p>
+        </div>
+        {{/if}}
+        <div>
+            <a href="/addProject" ><button>Add New Project</button></a>
+        </div>
+    </div>
+{{else}}
+    <div>
+        <div>
+            <h2>{{home.title}}</h3>
+            <p>{{home.occupation}}</p>
+            <p>{{home.description}}</p>
             <br>
         </div>
-        {{/each}}
-    {{else}}
-    <div>
-        <p>NO HOME DATA</p>
-    </div>
-    {{/if}}
-    {{#if experiences.length}}
-        <h3>Experiences</h3>
-        {{#each experiences}}
-        
+        {{#if projects.length}}
+            <h3>Projects</h3>
+            {{#each projects}}
+            
+            <div>
+                <a href = "/project/{{id}}"><img src="{{imagePath}}" alt="{{imagePath}}"></a>
+                <p><strong>{{title}}</strong></p>
+                <br>
+            </div>
+            {{/each}}
+        {{else}}
         <div>
-            <a href = "/viewExperience/{{id}}"><strong>{{title}}</strong></a>
-            <p>{{description}}</p>
-            <br>
+            <p>NO PROJECTS DATA</p>
         </div>
-        {{/each}}
-    {{else}}
-    <div>
-        <p>NO EXPERIENCES DATA</p>
+        {{/if}}
     </div>
-    {{/if}}
-</div>
+{{/if}}

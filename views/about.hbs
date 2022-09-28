@@ -1,3 +1,55 @@
+{{#if session.isLoggedIn}}
+    {{#if successful}}
+    <div>SUCCESSFULLY EDITED</div>
+    {{else}}
+    <div>{{errorMessages}}</div>
+    {{/if}}
+    <div>
+        {{#if about}}
+            <form method="POST" action="about">
+                <div>
+                    <input name='title' type="text" value="{{about.title}}">
+                </div>
+                <div>
+                    <textarea name="description" rows="15" cols="60">{{about.description}}</textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        {{else}}
+            <form method="POST" action="about">
+                <input type="text" >
+                <input type="text" >
+            </form>
+        {{/if}}
+    </div>
+{{else}}
+    <div>
+        {{#if about}}
+            <h3>{{about.title}}</h3>
+            <p>{{about.description}}</p>
+        {{else}}
+            NO ABOUT DATA
+        {{/if}}
+    </div>
+{{/if}}
+
+{{!-- {{#if session.isLoggedIn}}
+    <div>
+        {{#if about.length}}
+            <h3>My Journey into User Experience</h3>
+            <form method="POST" action="editAbout">
+                {{#each about}}
+                    <input name = "{{id}}" type="text" value="{{description}}"><a href="/deleteAbout/{{id}}"><button type = 'button' style="background-color: red; ">Delete</button></a>
+                {{/each}}
+            <button type="submit">Submit</button><a href="../"><button type="button">Back</button></a>
+            </form>
+        {{else}}
+        <div>
+            <p>NO DATA</p>
+        </div>
+        {{/if}}
+    </div>
+{{else}}
 <div>
     <h3>My Journey into User Experience</h3>
     {{#if about.length}}
@@ -10,3 +62,4 @@
     NO ABOUT DATA
     {{/if}}
 </div>
+{{/if}} --}}
