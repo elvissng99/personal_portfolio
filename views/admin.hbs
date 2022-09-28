@@ -1,13 +1,13 @@
 <div>
-    {{#if experiences.length}}
+    {{#if projects.length}}
         <table border="1">
-            <caption>Experiences</caption>
+            <caption>Projects</caption>
             <tbody>
-                {{#each experiences}}
+                {{#each projects}}
                 <tr>
                     <td>{{title}}</td>
                     <td>
-                        <a href="/viewExperience/{{id}}" type="button">View</a>
+                        <a href="/project/{{id}}" type="button">View</a>
                         <a href="/editExperience/{{id}}" type="button">Edit</a>
                         <a href="/deleteExperience/{{id}}" type="button">Delete</a>
                     </td>

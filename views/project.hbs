@@ -1,10 +1,8 @@
 <div>
-    {{#each experiences}}
-        <p>{{title}}</p>
-        <p>{{description}}</p>
-    {{/each}}
+    <p>{{project.title}}</p>
+    <p>{{project.description}}</p>
     
-    {{#if session.email}}
+    {{#if isLoggedIn}}
         <a href="/admin"><button>Back</button></a>
     {{else}}
         <a href="/"><button>Back</button></a>

@@ -66,7 +66,6 @@ exports.logout = (req,res)=>{
             res.redirect("/login")
         }
     })
-    
 }
 
 exports.form = (req,res)=>{
