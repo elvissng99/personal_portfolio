@@ -1,5 +1,5 @@
 <header>
-    <img class="logo" src="/ES logo.jpg" alt="logo">
+    <img src="/ES logo.jpg" class="logo" alt="logo">
     <nav>
         <ul class = 'nav__links'>
             {{#if session.email}}
@@ -12,10 +12,9 @@
             <li><a href="/resume">Resume</a></li>
         </ul>
     </nav>
-    {{#if session.email}}
+    {{#if session.isLoggedIn}}
         <a class="cta" href="/logout"><button>Log Out</button></a>
     {{else}}
         <a class="cta" href="/login"><button>Login</button></a>
-        
     {{/if}}
 </header>

@@ -1,0 +1,13 @@
+<div>
+    <p>{{project.title}}</p>
+    <p>{{project.description}}</p>
+    <div>
+        <img src="{{project.imagePath}}" alt="{{project.imagePath}}">
+    </div>
+    {{#if isLoggedIn}}
+        <a href="/admin"><button>Back</button></a>
+    {{else}}
+        <a href="/"><button>Back</button></a>
+    {{/if}}
+    
+</div>
