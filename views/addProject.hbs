@@ -20,9 +20,12 @@
             <div class = "textbox">
                 <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{project.description}}</textarea>
             {{#if errorMessages.length}}
-                {{#each errorMessages}}
-                    {{this}}
-                {{/each}}
+                <div class = "errormessage">
+                    <br><p> There was an error adding the project. Please try again.</p><br>
+                    {{#each errorMessages}}
+                        {{this}}<br>
+                    {{/each}}
+                </div>
             {{/if}}
             </div>
             <br><br>

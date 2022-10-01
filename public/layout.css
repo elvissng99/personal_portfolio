@@ -137,9 +137,8 @@ button:hover{
 .login-container{
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 20%;
   margin: auto;
-  align-content: stretch;
 }
 
 .row-container{
