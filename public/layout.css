@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+  background-color: white;
+}
+
+li,a,button,div,input,textarea{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ABB7B7;
+  text-decoration: none;
+}
+
+header{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 30px 5%;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.centrealign{
+  width: 40%;
+  margin: auto;
+  text-align: center;
+}
+
+.centre{
+  width: 40%;
+  margin: auto;
+}
+
+.caption{
+  color: black;
+}
+
+.projectimage {
+  object-fit: cover;
+  margin: auto;
+}
+
+.logo {
+  cursor: pointer;
+  margin-right: auto;
+  color: #67BEE5
+}
+
+.bluetext{
+  color: #67BEE5;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.blueleft{
+  color: #67BEE5;
+  margin-top: 50px;
+}
+
+.nav__links {
+  list-style: none;
+}
+
+.nav__links li{
+  display: inline-block;
+}
+
+.nav__links li a{
+  transition: all 0.3s ease 0s;
+  padding: 0px 20px;
+}
+
+.nav__links li a:hover{
+  color: #0088a9
+}
+
+button{
+  padding: 9px 25px;
+  background-color: none;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+button:hover{
+  background-color: #0088a9;
+}
+
+.backbutton button{
+  display: block;
+  border: solid white;
+  border-radius: 0;
+  color: white;
+  background-color: #67BEE5;
+  float: left;
+}
+
+
+
