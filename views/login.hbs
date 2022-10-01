@@ -1,18 +1,31 @@
 <div>
     <form method="POST" action="">
-            <div>
-                <input name="username" type="text" placeholder="Enter Email">
+        <div class = "login-container">
+            <div class = "about login-elements blacktext">
+                <h2>Username</h2><br>
             </div>
-            <div>
-                <input name="password" type="password" placeholder="Enter Password">
+            <div class = "login-elements">
+                <input name="username" type="text" placeholder="Enter username"><br><br>
             </div>
-            <div>
-                <button type="submit">Login</button><a href="../"><button type="button">Back</button></a>
+            <div class = "login-elements blacktext">
+                <h2>Password</h2><br>
+            </div>
+            <div class = "login-elements">
+                <input name="password" type="password" placeholder="Enter password"><br><br>
+            </div>
+            <div class = "login-elements">
+                <div class = "backbutton">
+                    <button type="submit">Login</button><a href="../">
+                </div>
+                <!--<div class = "cancelbutton">
+                    <button type="button">Back</button></a>
+                </div>-->
             </div>
             {{#if failedToLogin}}
-                <div>
-                    WRONG WRONG WRONG
+                <div class = "errormessage">
+                    <br><br><p> The username or password entered was wrong. Please try again.</p>
                 </div>
             {{/if}}
+        </div>
     </form>
 </div>

@@ -23,10 +23,19 @@
         {{/if}}
     </div>
 {{else}}
-    <div>
+    <div class = "flex-container">
         {{#if about}}
-            <h3>{{about.title}}</h3>
-            <p>{{about.description}}</p>
+        <div class = "about">
+            <img src="KTAbout.jpg" alt="Kaitao About Picture">
+        </div>
+        <div class = "about">
+            <div class = "justblue">
+                <h2>{{about.title}}</h2><br><br>
+            </div>
+            <div class = "createspace">
+                <p>{{about.description}}<p>
+            </div>
+        </div>
         {{else}}
             NO ABOUT DATA
         {{/if}}

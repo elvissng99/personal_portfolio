@@ -64,6 +64,10 @@ header{
   margin-top: 50px;
 }
 
+.justblue{
+  color: #67BEE5;
+}
+
 .nav__links {
   list-style: none;
 }
@@ -82,10 +86,9 @@ header{
 }
 
 button{
-  padding: 9px 25px;
+  padding: 7px 20px;
   background-color: none;
   border: none;
-  border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
 }
@@ -96,12 +99,62 @@ button:hover{
 
 .backbutton button{
   display: block;
-  border: solid white;
+  border: 2px solid white;
   border-radius: 0;
   color: white;
   background-color: #67BEE5;
   float: left;
 }
+
+.login-elements input{
+  object-fit: cover;
+}
+
+.cancelbutton button{
+  display: block;
+  border: 2px solid black;
+  border-radius: 0;
+  color: black;
+  background-color: white;
+  float: right;
+}
+
+.flex-container{
+  display: flex;
+  width: 90%;
+  margin: auto;
+  column-gap: 50px;
+}
+
+.about{
+  margin-top: 50px; 
+}
+
+.blacktext{
+  color: black;
+}
+
+.login-container{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: auto;
+  align-content: stretch;
+}
+
+.row-container{
+  flex-direction: row;
+}
+
+.errormessage{
+  color: red;
+}
+
+.createspace{
+  white-space: pre-wrap;
+  line-height: 1.8;
+}
+
 
 
 
