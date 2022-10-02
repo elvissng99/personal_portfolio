@@ -15,6 +15,10 @@ li,a,button,div,input,textarea{
   text-decoration: none;
 }
 
+img{
+  max-width: 100%;
+}
+
 header{
   display: flex;
   justify-content: flex-end;
@@ -142,7 +146,9 @@ button:hover{
 }
 
 .row-container{
+  display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .errormessage{
@@ -171,6 +177,15 @@ button:hover{
     display: none;
 }
 
+.bluetextbutton button{
+  color: #67BEE5;
+  float: right;
+}
+
+.centretext{
+  text-align: center;
+}
+
 .textbox input{
   width: 100%;
 }
@@ -178,6 +193,7 @@ button:hover{
 .textbox textarea{
   width: 100%;
 }
+
 
 
 
