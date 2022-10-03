@@ -177,6 +177,24 @@ button:hover{
     display: none;
 }
 
+.savebutton button{
+  display: block;
+  border-radius: 0;
+  color: white;
+  background-color: #67BEE5;
+  float: right;
+  margin-right: 30px;
+}
+
+.deletebutton button{
+  display: block;
+  border: 1px solid black;
+  border-radius: 0;
+  color: red;
+  background-color: white;
+  float: right;
+}
+
 .bluetextbutton button{
   color: #67BEE5;
   float: right;
