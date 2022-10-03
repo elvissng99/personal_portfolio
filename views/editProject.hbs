@@ -1,24 +1,38 @@
-<div>
+<div class = "container centre">
     <form method="POST" action="/editProject/{{id}}" enctype="multipart/form-data">
-        <div>
+        <div class = "blacktext">
+            <h2>Title</h2><br>
+        </div>
+        <div class = "textbox">
             <input name="title" type="text" placeholder="Enter Title" value = "{{project.title}}">
         </div>
-        <div>
-            <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{project.description}}</textarea>
+        <br>
             {{#if errorMessages.length}}
                 {{#each errorMessages}}
                     {{this}}
                 {{/each}}
             {{/if}}
+        <div class="image-upload">
+                <label for="file-input">
+                    <img src="{{project.imagePath}}" alt="{{project.imagePath}}">
+                </label>
+                    <input name='imagePath' id="file-input" type="file" />
         </div>
-        <div>
-            <img src="{{project.imagePath}}" alt="{{project.imagePath}}">
+        <br><br>
+        <div class = "blacktext">
+            <h2>Description</h2><br>
         </div>
-        <div>
-            <input name='imagePath' type="file" >
+        <div class = "textbox">
+            <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{project.description}}</textarea>
         </div>
+        <br><br>
         <div>
-            <button type="submit">Submit</button><a href="../"><button type="button">Back</button></a><a href="/deleteProject/{{id}}"><button type = 'button' style="background-color: red; ">Delete</button></a>
+            <div class = "deletebutton">
+                <a href="/deleteProject/{{id}}"><button type = 'button'>Delete</button></a>
+            </div>   
+            <div class = "savebutton">
+                <button type="submit">Save</button><a href="../">
+            </div>
         </div>
     </form>
 </div>

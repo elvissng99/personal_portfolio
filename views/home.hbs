@@ -1,41 +1,79 @@
 {{#if session.isLoggedIn}}
-    <div>
-        {{#if projects.length}}
-                <p><strong>My Projects</strong></p>
+    <div class = "container">
+        <div class = "centre">
+            <div class = "about blacktext">
+                <h2>Title</h2><br>
+            </div>
+            <div class = "textbox">
+                <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{home.title}}</textarea><br><br>
+            </div>
+            <div class = "blacktext">
+                <h2>Subtitle</h2><br>
+            </div>
+            <div class = "textbox">
+                <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{home.occupation}}
+{{home.description}}</textarea><br><br><br>
+            </div>
+            {{#if projects.length}}
+                    <div class = "row-container">
+                        <div class = "justblue">
+                            <h2><strong>My Projects</strong></h2>
+                        </div>
+                            <a href="/addProject" >
+                            <div class = "bluetextbutton">
+                                <button>+ Add New Project</button>
+                            </div>
+                            </a>
+                    </div>
                 {{#each projects}}
+                    <br><br>
                     <a href = "/editProject/{{id}}"><img src="{{imagePath}}" alt="{{imagePath}}"></a>
-                    <p><strong>{{title}}</strong></p>
+                    <div class = "centretext blacktext">
+                        <br><p><strong>{{title}}</strong></p>
+                    </div>
                 {{/each}}
-        {{else}}
-        <div>
-            <p>NO DATA</p>
-        </div>
-        {{/if}}
-        <div>
-            <a href="/addProject" ><button>Add New Project</button></a>
+                <br><br><br><br>
+            {{else}}
+            <div>
+                <p>NO DATA</p>
+            </div>
+            {{/if}}
         </div>
     </div>
 {{else}}
-    <div>
-        <div>
-            <h2>{{home.title}}</h3>
-            <p>{{home.occupation}}</p>
-            <p>{{home.description}}</p>
-            <br>
-        </div>
+    <div class = "container">
+        <div class = "centrealign">
+            <div>
+                <div class = "bluetext">
+                    <h2>{{home.title}}</h2><br>
+                </div>
+                    <p>{{home.occupation}}</p>
+                    <p>{{home.description}}</p>
+                    <br>
+            </div>
         {{#if projects.length}}
-            <h3>Projects</h3>
+            <div class = "bluetext">
+                <h3>My Projects</h3><br><br><br>
+            </div>
             {{#each projects}}
             
             <div>
-                <a href = "/project/{{id}}"><img src="{{imagePath}}" alt="{{imagePath}}"></a>
-                <p><strong>{{title}}</strong></p>
-                <br>
+                <a href = "/project/{{id}}">
+                    <div class = "projectimage">
+                        <img src="{{imagePath}}" alt="{{imagePath}}">
+                    </div>
+                </a>
+                <div class = "caption">
+                    <br>
+                    <p><strong>{{title}}</strong></p>
+                    <br><br><br>
+                </div>
             </div>
             {{/each}}
         {{else}}
         <div>
             <p>NO PROJECTS DATA</p>
+        </div>
         </div>
         {{/if}}
     </div>

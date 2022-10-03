@@ -4,16 +4,19 @@
   box-sizing: border-box;
   margin:0;
   padding:0;
-  background-color: #24252A;
+  background-color: white;
 }
 
 li,a,button,div,input,textarea{
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
-  color: #edf0f1;
+  color: #ABB7B7;
   text-decoration: none;
+}
 
+img{
+  max-width: 100%;
 }
 
 header{
@@ -23,8 +26,50 @@ header{
   padding: 30px 5%;
 }
 
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.centrealign{
+  width: 40%;
+  margin: auto;
+  text-align: center;
+}
+
+.centre{
+  width: 40%;
+  margin: auto;
+}
+
+.caption{
+  color: black;
+}
+
+.projectimage {
+  object-fit: cover;
+  margin: auto;
+}
+
 .logo {
+  cursor: pointer;
   margin-right: auto;
+  color: #67BEE5
+}
+
+.bluetext{
+  color: #67BEE5;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.blueleft{
+  color: #67BEE5;
+  margin-top: 50px;
+}
+
+.justblue{
+  color: #67BEE5;
 }
 
 .nav__links {
@@ -45,19 +90,155 @@ header{
 }
 
 button{
-  padding: 9px 25px;
-  margin-left: 15px;
-  background-color: rgba(39, 179, 106,1);
+  padding: 7px 20px;
+  background-color: none;
   border: none;
-  border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
 }
 
 button:hover{
-  background-color: rgba(39, 179, 106,0.8);
+  background-color: #0088a9;
 }
 
-p{
-  white-space: pre-wrap;
+.backbutton button{
+  display: block;
+  border: 2px solid white;
+  border-radius: 0;
+  color: white;
+  background-color: #67BEE5;
+  float: left;
 }
+
+.login-elements input{
+  object-fit: cover;
+}
+
+.cancelbutton button{
+  display: block;
+  border: 2px solid black;
+  border-radius: 0;
+  color: black;
+  background-color: white;
+  float: right;
+}
+
+.greentext{
+  color:green;
+}
+
+.flex-container{
+  display: flex;
+  width: 90%;
+  margin: auto;
+  column-gap: 50px;
+}
+
+.about{
+  margin-top: 50px; 
+}
+
+.blacktext{
+  color: black;
+}
+
+.login-container{
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: auto;
+}
+
+.row-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+.errormessage{
+  color: red;
+}
+
+.createspace{
+  white-space: pre-wrap;
+  line-height: 1.8;
+}
+
+.rightside{
+  float: right;
+}
+
+.image-upload img{
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  cursor: pointer;
+}
+
+.image-upload > input
+{
+    display: none;
+}
+
+.savebutton button{
+  display: block;
+  border-radius: 0;
+  color: white;
+  background-color: #67BEE5;
+  float: right;
+  margin-right: 30px;
+}
+
+.deletebutton button{
+  display: block;
+  border: 1px solid black;
+  border-radius: 0;
+  color: red;
+  background-color: white;
+  float: right;
+}
+
+.projectdeletebutton button{
+  display: block;
+  border: 2px solid black;
+  border-radius: 0;
+  color: white;
+  background-color: red;
+  float: right;
+  margin-right: 30px;
+}
+
+.delete-container{
+  display: flex;
+  flex-direction: column;
+  width: 19%;
+  margin: auto;
+}
+
+.bluetextbutton button{
+  color: #67BEE5;
+  float: right;
+}
+
+.centretext{
+  text-align: center;
+}
+
+.textbox input{
+  width: 100%;
+}
+
+.textbox textarea{
+  width: 100%;
+}
+
+
+
+
+

@@ -1,6 +1,15 @@
-<div>
+<div class = "delete-container">
     <form method="POST" action="{{id}}">
-        <p>Are you sure you want to delete</p>
-        <button type="submit">Delete</button><a href ="../editProject/{{id}}"><button type="button">Cancel</button></a>
+        <div class = "blacktext rightside">
+            <br><br><br><p>Are you sure you want to delete the project?</p><br><br>
+        </div>
+        <div>
+            <div class = "cancelbutton">
+                <a><button type="button" onclick="history.back()">Cancel</button></a>
+            </div>
+            <div class = "projectdeletebutton">
+                <button type="submit">Delete</button><a href ="../editProject/{{id}}">
+            </div>
+        </div>
     </form>
 </div>
