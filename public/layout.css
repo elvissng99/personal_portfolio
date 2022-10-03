@@ -123,6 +123,10 @@ button:hover{
   float: right;
 }
 
+.greentext{
+  color:green;
+}
+
 .flex-container{
   display: flex;
   width: 90%;
