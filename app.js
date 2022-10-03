@@ -80,6 +80,10 @@ app.use(expressSession({
     saveUninitialized:true
 }))
 
+app.get('/junhan',function(request,response){
+    response.render('addExperience_JH.hbs')
+})
+
 app.get('/', function(request,response){
     const query = `SELECT * FROM home`
     db.get(query,function(error,home){

@@ -1,13 +1,21 @@
-<div>
-    <p>{{project.title}}</p>
-    <p>{{project.description}}</p>
-    <div>
+<div class = "centre">
+    <div class = "blueleft">
+        <h2>{{project.title}}</h2>
+        <br><br>
+    </div>
+    <div class = "projectimage">
         <img src="{{project.imagePath}}" alt="{{project.imagePath}}">
     </div>
+    <br><br>
+    <p>{{project.description}}</p><br><br>
     {{#if isLoggedIn}}
+    <div class = "backbutton">
         <a href="/admin"><button>Back</button></a>
+    </div>
     {{else}}
+    <div class = "backbutton">
         <a href="/"><button>Back</button></a>
+    </div>
     {{/if}}
     
 </div>

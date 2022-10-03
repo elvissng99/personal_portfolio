@@ -1,21 +1,37 @@
-<div>
-    <form method="POST" action="addProject" enctype="multipart/form-data">
-        <div>
-            <input name="title" type="text" placeholder="Enter Title" value = "{{project.title}}">
-        </div>
-        <div>
-            <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{project.description}}</textarea>
+<div class ="container">
+    <div class = "centre">
+        <form method="POST" action="addProject" enctype="multipart/form-data">
+            <div>
+                <br><br><br><h2>Title</h2><br>
+            </div>
+            <div class = "textbox">
+                <input name="title" type="text" placeholder="Enter Title" value = "{{project.title}}">
+            </div>
+            <br><br>
+            <div class="image-upload">
+                <label for="file-input">
+                    <img src="uploadimg.jpg"/>
+                </label>
+                    <input name='imagePath' id="file-input" type="file" />
+            </div>
+            <div>
+                <br><h2>Description</h2><br>
+            </div>
+            <div class = "textbox">
+                <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{project.description}}</textarea>
             {{#if errorMessages.length}}
-                {{#each errorMessages}}
-                    {{this}}
-                {{/each}}
+                <div class = "errormessage">
+                    <br><p> There was an error adding the project. Please try again.</p><br>
+                    {{#each errorMessages}}
+                        {{this}}<br>
+                    {{/each}}
+                </div>
             {{/if}}
-        </div>
-        <div>
-            <input name='imagePath' type="file" >
-        </div>
-        <div>
-            <button type="submit">Submit</button><a href="../"><button type="button">Back</button></a>
-        </div>
-    </form>
+            </div>
+            <br><br>
+            <div class = "backbutton rightside">
+                <button type="submit">Add</button><a href="../">
+            </div>
+        </form>
+    </div>
 </div>
