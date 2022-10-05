@@ -4,6 +4,7 @@ const sqlite3 = require("sqlite3")
 const expressSession = require('express-session')
 const multer = require("multer")
 const path = require("path")
+const bcrypt = require("bcrypt");
 
 const storage = multer.diskStorage({
     destination: "./public/",
@@ -21,7 +22,7 @@ const upload = multer({
 }).single('imagePath')
 
 const ADMIN_USERNAME ="kaitao"
-const ADMIN_PASSWORD = "kaitao123"
+const ADMIN_PASSWORD = "$2b$10$vVMcvBcbCgpq7r/PjvblsuSdkyMDe0MDQyTPt37OhBUfANfwDnGE2"
 
 const TITLE_MAX_LENGTH = 50;
 const ABOUT_DESCRIPTION_MAX_LENGTH = 2000;
@@ -54,35 +55,24 @@ db.run(`
         imagePath TEXT
 	);
 `)
-// const {v4:uuidv4}= require('uuid')
 const app = express()
 const port = 8080
 app.engine('hbs',expressHandlebars.engine({
     defaultLayout: 'main.hbs',
     extname:".hbs",
 }))
-// app.set('view engine', 'hbs')
+
 app.use(express.static("public"))
 app.use(express.urlencoded({
     extended:false
 }))
 app.use(express.json());
 
-// app.use(express.json())
-// app.use(expressSession({
-//     secret:uuidv4(),
-//     resave:false,
-//     saveUninitialized:true
-// }))
 app.use(expressSession({
     secret:'sfgertjhsgwrsgethgw',
     resave:false,
     saveUninitialized:true
 }))
-
-app.get('/junhan',function(request,response){
-    response.render('addExperience_JH.hbs')
-})
 
 app.get('/', function(request,response){
     const query = `SELECT * FROM home`
@@ -112,7 +102,7 @@ app.get('/', function(request,response){
 
 app.get('/about', function(request,response){
     const query = `SELECT * FROM about`
-    db.get(query,function(error,about){
+    db.all(query,function(error,about){
         const errorMessages = []
         if(error){
             errorMessages.push("Internal server error")
@@ -127,7 +117,7 @@ app.get('/about', function(request,response){
     })
 })
 
-app.post('/about',function(request,response){
+app.post('/editAbout/:id',function(request,response){
     const title = request.body.title
     const description = request.body.description
     let successful = false
@@ -150,8 +140,8 @@ app.post('/about',function(request,response){
     }
 
     if(errorMessages.length == 0){
-        const query = `UPDATE about SET title = ?, description = ? WHERE id = 1`
-        const values = [title,description]
+        const query = `UPDATE about SET title = ?, description = ? WHERE id = ?`
+        const values = [title,description,request.params.id]
         db.run(query,values,function(error){
             if(error){
                 errorMessages.push("Internal server error")
@@ -164,219 +154,392 @@ app.post('/about',function(request,response){
         successful,
         session:request.session,
         about:{
+            id:request.params.id,
             title:title,
             description:description}
     }
-    response.render('about.hbs', model)
+    response.render('editAbout.hbs', model)
 })
+
+app.get('/editAbout/:id',function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        const query = `SELECT * from about where id =?`
+        const values = [id]
+        db.get(query, values, function(error,about){
+            const model = {
+                id,
+                about : about,
+                session:request.session,
+            }
+            response.render('editAbout.hbs', model)
+        })
+    }
+})
+
+app.get('/addAbout',function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        response.render("addAbout.hbs",{session:request.session})
+    }
+})
+
+app.post('/addAbout',function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const title = request.body.title
+        const description = request.body.description
+
+        const errorMessages = []
+        if (title == ""){
+            errorMessages.push("Title can't be empty")
+        }else if (TITLE_MAX_LENGTH < title.length){
+            errorMessages.push("Title may be at most " +TITLE_MAX_LENGTH + " characters long")
+        }
+
+        if (description ==""){
+            errorMessages.push("Description should not be empty")
+        }else if (ABOUT_DESCRIPTION_MAX_LENGTH < description.length){
+            errorMessages.push("Description may be at most " +ABOUT_DESCRIPTION_MAX_LENGTH + " characters long")
+        }
+
+        if(!request.session.isLoggedIn){
+            errorMessages.push("Not logged in")
+        }
+
+        if(errorMessages.length == 0){
+            const query = `INSERT INTO about (title,description) VALUES (?,?)`
+            const values = [title,description]
+            db.run(query,values,function(error){
+                if(error){
+                    errorMessages.push("Internal server error")
+                    const model = {
+                        errorMessages,
+                        about:{
+                            title:title,
+                            description:description
+                        }
+                    }
+                    response.render('addAbout.hbs', model)
+                }else{
+                    response.redirect("/about")
+                }
+            })
+        }else{
+            const model = {
+                errorMessages,
+                about:{
+                    title:title,
+                    description:description
+                }
+                
+            }
+            response.render("addAbout.hbs",model)
+        }
+    }
+})
+
 
 app.get('/addProject', function(request,response){
     if(!request.session.isLoggedIn){
         response.redirect("/login")
     }else{
-        response.render("addProject.hbs")
+        response.render("addProject.hbs",{session:request.session})
     }
 })
 
 app.post('/addProject', upload, function(request,response){
-    const title = request.body.title
-    const description = request.body.description
-    const imagePath = request.body.imagePath
-
-    const errorMessages = []
-    if (title == ""){
-        errorMessages.push("Title can't be empty")
-    }else if (TITLE_MAX_LENGTH < title.length){
-        errorMessages.push("Title may be at most " +TITLE_MAX_LENGTH + " characters long")
-    }
-
-    if (description ==""){
-        errorMessages.push("Description should not be empty")
-    }else if (PROJECT_DESCRIPTION_MAX_LENGTH < description.length){
-        errorMessages.push("Description may be at most " +PROJECT_DESCRIPTION_MAX_LENGTH + " characters long")
-    }
-
     if(!request.session.isLoggedIn){
-        errorMessages.push("Not logged in")
-    }
-
-    if(imagePath == undefined){
-        errorMessages.push("Please attach a file")
-    }
-
-    if(errorMessages.length == 0){
-        const query = `INSERT INTO projects (title,description,imagePath) VALUES (?,?,?)`
-        const values = [title,description,imagePath]
-        db.run(query,values,function(error){
-            if(error){
-                errorMessages.push("Internal server error")
-                const model = {
-                    errorMessages,
-                    project:{
-                        title:title,
-                        description:description,
-                        imagePath:imagePath                    }
-                }
-                response.render('addProject.hbs', model)
-            }else{
-                response.redirect("/")
-            }
-        })
+        response.redirect("/login")
     }else{
-        const model = {
-            errorMessages,
-            project:{
-                title:title,
-                description:description,
-                imagePath:imagePath            }
-            
+        const title = request.body.title
+        const description = request.body.description
+        const imagePath = request.body.imagePath
+
+        const errorMessages = []
+        if (title == ""){
+            errorMessages.push("Title can't be empty")
+        }else if (TITLE_MAX_LENGTH < title.length){
+            errorMessages.push("Title may be at most " +TITLE_MAX_LENGTH + " characters long")
         }
-        response.render("addProject.hbs",model)
+
+        if (description ==""){
+            errorMessages.push("Description should not be empty")
+        }else if (PROJECT_DESCRIPTION_MAX_LENGTH < description.length){
+            errorMessages.push("Description may be at most " +PROJECT_DESCRIPTION_MAX_LENGTH + " characters long")
+        }
+
+        if(!request.session.isLoggedIn){
+            errorMessages.push("Not logged in")
+        }
+
+        if(imagePath == undefined){
+            errorMessages.push("Please attach a file")
+        }
+
+        if(errorMessages.length == 0){
+            const query = `INSERT INTO projects (title,description,imagePath) VALUES (?,?,?)`
+            const values = [title,description,imagePath]
+            db.run(query,values,function(error){
+                if(error){
+                    errorMessages.push("Internal server error")
+                    const model = {
+                        errorMessages,
+                        project:{
+                            title:title,
+                            description:description,
+                            imagePath:imagePath                    }
+                    }
+                    response.render('addProject.hbs', model)
+                }else{
+                    response.redirect("/")
+                }
+            })
+        }else{
+            const model = {
+                errorMessages,
+                project:{
+                    title:title,
+                    description:description,
+                    imagePath:imagePath            }
+                
+            }
+            response.render("addProject.hbs",model)
+        }
     }
+    
+})
+
+app.get('/deleteAbout/:id',function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        response.render("deleteAbout.hbs",{id})
+    }
+    
+})
+
+app.post('/deleteAbout/:id', function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        const query = `DELETE FROM about WHERE id =?`
+        const values = [id]
+        db.run(query, values,function(error){
+            if (error){
+                const errorMessages = []
+                errorMessages.push("Internal Server Error")
+                response.render("deleteAbout.hbs",{errorMessages})
+            }else{
+                const model = {
+                    id,
+                    session:request.session,
+                }
+                response.redirect('/about')
+            }
+            
+        })
+    }
+    
 })
 
 app.get('/project/:id',function(request,response){
-    const id = request.params.id
-    const query = `SELECT * from projects where id =?`
-    const values = [id]
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        const query = `SELECT * from projects where id =?`
+        const values = [id]
 
-    db.get(query, values, function(error,project){
-        const model = {
-            project :project,
-            session:request.session,
-        }
-        response.render('project.hbs', model)
-    })
+        db.get(query, values, function(error,project){
+            const model = {
+                project :project,
+                session:request.session,
+            }
+            response.render('project.hbs', model)
+        })
+    }
+    
 })
 
 app.get('/editProject/:id',function(request,response){
-    const id = request.params.id
-    const query = `SELECT * from projects where id =?`
-    const values = [id]
-    db.get(query, values, function(error,project){
-        const model = {
-            id,
-            project :project,
-            session:request.session,
-        }
-        response.render('editProject.hbs', model)
-    })
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        const query = `SELECT * from projects where id =?`
+        const values = [id]
+        db.get(query, values, function(error,project){
+            const model = {
+                id,
+                project :project,
+                session:request.session,
+            }
+            response.render('editProject.hbs', model)
+        })
+    }
+    
 })
 
 app.post('/editProject/:id',upload,function(request,response){
-    const title = request.body.title
-    const description = request.body.description
-    const imagePath = request.body.imagePath
-
-    const errorMessages = []
-    if (title == ""){
-        errorMessages.push("Title can't be empty")
-    }else if (TITLE_MAX_LENGTH < title.length){
-        errorMessages.push("Title may be at most " +TITLE_MAX_LENGTH + " characters long")
-    }
-
-    if (description ==""){
-        errorMessages.push("Description should not be empty")
-    }else if (PROJECT_DESCRIPTION_MAX_LENGTH < description.length){
-        errorMessages.push("Description may be at most " +PROJECT_DESCRIPTION_MAX_LENGTH + " characters long")
-    }
-
     if(!request.session.isLoggedIn){
-        errorMessages.push("Not logged in")
-    }
-
-    if(errorMessages.length == 0){
-        let query
-        let values
-        if (imagePath== undefined){
-            query = `UPDATE projects SET title = ?, description = ? WHERE id = ?`
-            values = [title,description, request.params.id]
-        }else{
-            query = `UPDATE projects SET title = ?, description = ?, imagePath = ? WHERE id = ?`
-            values = [title,description,imagePath, request.params.id]
-        }
-        
-        db.run(query,values,function(error){
-            if(error){
-                errorMessages.push("Internal server error")
-                const model = {
-                    errorMessages,
-                    project:{
-                        title:title,
-                        description:description,
-                        imagePath:imagePath
-                    }
-                }
-                response.render('editProject.hbs', model)
-            }else{
-                response.redirect("/")
-            }
-        })
+        response.redirect("/login")
     }else{
-        const model = {
-            errorMessages,
-            project:{
-                title:title,
-                description:description,
-                imagePath:imagePath
+        const title = request.body.title
+        const description = request.body.description
+        const imagePath = request.body.imagePath
+
+        const errorMessages = []
+        if (title == ""){
+            errorMessages.push("Title can't be empty")
+        }else if (TITLE_MAX_LENGTH < title.length){
+            errorMessages.push("Title may be at most " +TITLE_MAX_LENGTH + " characters long")
+        }
+
+        if (description ==""){
+            errorMessages.push("Description should not be empty")
+        }else if (PROJECT_DESCRIPTION_MAX_LENGTH < description.length){
+            errorMessages.push("Description may be at most " +PROJECT_DESCRIPTION_MAX_LENGTH + " characters long")
+        }
+
+        if(!request.session.isLoggedIn){
+            errorMessages.push("Not logged in")
+        }
+
+        if(errorMessages.length == 0){
+            let query
+            let values
+            if (imagePath== undefined){
+                query = `UPDATE projects SET title = ?, description = ? WHERE id = ?`
+                values = [title,description, request.params.id]
+            }else{
+                query = `UPDATE projects SET title = ?, description = ?, imagePath = ? WHERE id = ?`
+                values = [title,description,imagePath, request.params.id]
             }
             
+            db.run(query,values,function(error){
+                if(error){
+                    errorMessages.push("Internal server error")
+                    const model = {
+                        errorMessages,
+                        project:{
+                            title:title,
+                            description:description,
+                            imagePath:imagePath
+                        }
+                    }
+                    response.render('editProject.hbs', model)
+                }else{
+                    response.redirect("/")
+                }
+            })
+        }else{
+            const model = {
+                errorMessages,
+                project:{
+                    title:title,
+                    description:description,
+                    imagePath:imagePath
+                }
+                
+            }
+            response.render("editProject.hbs",model)
         }
-        response.render("editProject.hbs",model)
     }
+    
 })
 
 app.get('/deleteProject/:id',function(request,response){
-    const id = request.params.id
-    response.render("deleteProject.hbs",{id})
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        response.render("deleteProject.hbs",{id})
+    }
+    
 })
 
 app.post('/deleteProject/:id', function(request,response){
-    const id = request.params.id
-    const query = `DELETE FROM projects WHERE id =?`
-    const values = [id]
-    db.run(query, values,function(error){
-        if (error){
-            const errorMessages = []
-            errorMessages.push("Internal Server Error")
-            response.render("deleteProject.hbs",{errorMessages})
-        }else{
-            const model = {
-                id,
-                session:request.session,
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        const query = `DELETE FROM projects WHERE id =?`
+        const values = [id]
+        db.run(query, values,function(error){
+            if (error){
+                const errorMessages = []
+                errorMessages.push("Internal Server Error")
+                response.render("deleteProject.hbs",{errorMessages})
+            }else{
+                const model = {
+                    id,
+                    session:request.session,
+                }
+                response.redirect('/')
             }
-            response.redirect('/')
-        }
-        
-    })
+            
+        })
+    }
+    
 })
 
 app.get('/login', function(request,response){
-    response.render('login.hbs')
+    if(!request.session.isLoggedIn){
+        response.render('login.hbs')
+    }else{
+        response.redirect("/")
+    }
+    
 })
 
 app.post('/login', function(request,response){
-    const username = request.body.username
-    const password = request.body.password
-    if(username == ADMIN_USERNAME && password == ADMIN_PASSWORD){
-        request.session.isLoggedIn = true
-        response.redirect('/')
-    }else{
-        const model = {
-            failedToLogin: true
+    if(!request.session.isLoggedIn){
+        const username = request.body.username
+        const password = request.body.password
+        if(username == ADMIN_USERNAME){
+            bcrypt.compare(password, ADMIN_PASSWORD, function(err, result) {
+                if (result == true){
+                    request.session.isLoggedIn = true
+                    response.redirect('/')
+                }else{
+                    const model = {
+                        failedToLogin: true
+                    }
+                    response.render('login.hbs',model)
+                }
+            })
+        }else{
+            const model = {
+                failedToLogin: true
+            }
+            response.render('login.hbs',model)
         }
-        response.render('login.hbs',model)
+    }else{
+        response.redirect('/')
     }
+    
 })
 
 app.get('/logout',function(request,response){
-    request.session.destroy(function(error){
-        if (error){
-            response.redirect("/")
-        }else{
-            response.redirect("/login")
-        }
-    })
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        request.session.destroy(function(error){
+            if (error){
+                response.redirect("/")
+            }else{
+                response.redirect("/login")
+            }
+        })
+    }
+    
 })
 
 app.get('/resume',function (request,response){
