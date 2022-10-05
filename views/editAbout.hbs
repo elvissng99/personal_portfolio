@@ -1,0 +1,40 @@
+<div class = "container centre">
+{{#if session.isLoggedIn}}
+    {{#if successful}}
+    <div class = "greentext">
+        <p>The About section has been successfully edited.</p>
+    </div>
+    {{else}}
+    <div>{{errorMessages}}</div>
+    {{/if}}
+        {{#if about}}
+            <form method="POST" action="/editAbout/{{id}}">
+                <div class = "blacktext about">
+                    <h2>Title</h2><br>
+                </div>
+                <div class = "textbox">
+                    <input name='title' type="text" value="{{about.title}}">
+                </div>
+                <br>
+                <div class = "blacktext">
+                    <h2>Description</h2><br>
+                </div>
+                <div class = "textbox">
+                    <textarea name="description" rows="15" cols="60">{{about.description}}</textarea>
+                </div>
+                <br><br>
+                <div class = "deletebutton">
+                    <a href="/deleteAbout/{{id}}"><button type = 'button'>Delete</button></a>
+                </div>
+                <div class = "backbutton">
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+        {{else}}
+            <form method="POST" action="editAbout">
+                <input type="text" >
+                <input type="text" >
+            </form>
+        {{/if}}
+</div>
+{{/if}}

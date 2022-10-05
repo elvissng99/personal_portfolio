@@ -1,86 +1,40 @@
-<div class = "container centre">
 {{#if session.isLoggedIn}}
-    {{#if successful}}
-    <div class = "greentext">
-        <p>The About section has been successfully edited.</p>
-    </div>
-    {{else}}
-    <div>{{errorMessages}}</div>
-    {{/if}}
-        {{#if about}}
-            <form method="POST" action="about">
-                <div class = "blacktext about">
-                    <h2>Title</h2><br>
+    <div class = "container centre">
+        {{#if about.length}}
+            {{#each about}}
+                <div>
+                    <div>
+                        <a href="/editAbout/{{id}}"><h2 class = "justblue">{{title}}</h2></a>
+                    </div>
+                    <div class = "createspace">
+                        <p>{{description}}<p>
+                    </div>
                 </div>
-                <div class = "textbox">
-                    <input name='title' type="text" value="{{about.title}}">
-                </div>
-                <br>
-                <div class = "blacktext">
-                    <h2>Description</h2><br>
-                </div>
-                <div class = "textbox">
-                    <textarea name="description" rows="15" cols="60">{{about.description}}</textarea>
-                </div>
-                <br><br>
-                <div class = "backbutton">
-                    <button type="submit">Save</button>
-                </div>
-            </form>
+            {{/each}}
         {{else}}
-            <form method="POST" action="about">
-                <input type="text" >
-                <input type="text" >
-            </form>
+            NO ABOUT DATA
         {{/if}}
-</div>
+        <a href="/addAbout" >
+            <div class = "bluetextbutton">
+                <button>+ Add New Information</button>
+            </div>
+        </a>
+    </div>
 {{else}}
-    <div class = "flex-container">
-        {{#if about}}
-        <div class = "about">
-            <img src="KTAbout.jpg" alt="Kaitao About Picture">
-        </div>
-        <div class = "about">
-            <div class = "justblue">
-                <h2>{{about.title}}</h2><br><br>
-            </div>
-            <div class = "createspace">
-                <p>{{about.description}}<p>
-            </div>
-        </div>
+    <div class = "container centre">
+        {{#if about.length}}
+            {{#each about}}
+                <div>
+                    <div class = "justblue">
+                        <h2>{{title}}</h2>
+                    </div>
+                    <div class = "createspace">
+                        <p>{{description}}<p>
+                    </div>
+                </div>
+            {{/each}}
         {{else}}
             NO ABOUT DATA
         {{/if}}
     </div>
 {{/if}}
-
-{{!-- {{#if session.isLoggedIn}}
-    <div>
-        {{#if about.length}}
-            <h3>My Journey into User Experience</h3>
-            <form method="POST" action="editAbout">
-                {{#each about}}
-                    <input name = "{{id}}" type="text" value="{{description}}"><a href="/deleteAbout/{{id}}"><button type = 'button' style="background-color: red; ">Delete</button></a>
-                {{/each}}
-            <button type="submit">Submit</button><a href="../"><button type="button">Back</button></a>
-            </form>
-        {{else}}
-        <div>
-            <p>NO DATA</p>
-        </div>
-        {{/if}}
-    </div>
-{{else}}
-<div>
-    <h3>My Journey into User Experience</h3>
-    {{#if about.length}}
-    <ul>
-        {{#each about}}
-        <li>{{description}}</li>
-        {{/each}}
-    </ul>
-    {{else}}
-    NO ABOUT DATA
-    {{/if}}
-</div>
-{{/if}} --}}

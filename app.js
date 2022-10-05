@@ -102,7 +102,7 @@ app.get('/', function(request,response){
 
 app.get('/about', function(request,response){
     const query = `SELECT * FROM about`
-    db.get(query,function(error,about){
+    db.all(query,function(error,about){
         const errorMessages = []
         if(error){
             errorMessages.push("Internal server error")
@@ -117,7 +117,7 @@ app.get('/about', function(request,response){
     })
 })
 
-app.post('/about',function(request,response){
+app.post('/editAbout/:id',function(request,response){
     const title = request.body.title
     const description = request.body.description
     let successful = false
@@ -140,8 +140,8 @@ app.post('/about',function(request,response){
     }
 
     if(errorMessages.length == 0){
-        const query = `UPDATE about SET title = ?, description = ? WHERE id = 1`
-        const values = [title,description]
+        const query = `UPDATE about SET title = ?, description = ? WHERE id = ?`
+        const values = [title,description,request.params.id]
         db.run(query,values,function(error){
             if(error){
                 errorMessages.push("Internal server error")
@@ -154,17 +154,101 @@ app.post('/about',function(request,response){
         successful,
         session:request.session,
         about:{
+            id:request.params.id,
             title:title,
             description:description}
     }
-    response.render('about.hbs', model)
+    response.render('editAbout.hbs', model)
 })
+
+app.get('/editAbout/:id',function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        const query = `SELECT * from about where id =?`
+        const values = [id]
+        db.get(query, values, function(error,about){
+            const model = {
+                id,
+                about : about,
+                session:request.session,
+            }
+            response.render('editAbout.hbs', model)
+        })
+    }
+})
+
+app.get('/addAbout',function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        response.render("addAbout.hbs",{session:request.session})
+    }
+})
+
+app.post('/addAbout',function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const title = request.body.title
+        const description = request.body.description
+
+        const errorMessages = []
+        if (title == ""){
+            errorMessages.push("Title can't be empty")
+        }else if (TITLE_MAX_LENGTH < title.length){
+            errorMessages.push("Title may be at most " +TITLE_MAX_LENGTH + " characters long")
+        }
+
+        if (description ==""){
+            errorMessages.push("Description should not be empty")
+        }else if (ABOUT_DESCRIPTION_MAX_LENGTH < description.length){
+            errorMessages.push("Description may be at most " +ABOUT_DESCRIPTION_MAX_LENGTH + " characters long")
+        }
+
+        if(!request.session.isLoggedIn){
+            errorMessages.push("Not logged in")
+        }
+
+        if(errorMessages.length == 0){
+            const query = `INSERT INTO about (title,description) VALUES (?,?)`
+            const values = [title,description]
+            db.run(query,values,function(error){
+                if(error){
+                    errorMessages.push("Internal server error")
+                    const model = {
+                        errorMessages,
+                        about:{
+                            title:title,
+                            description:description
+                        }
+                    }
+                    response.render('addAbout.hbs', model)
+                }else{
+                    response.redirect("/about")
+                }
+            })
+        }else{
+            const model = {
+                errorMessages,
+                about:{
+                    title:title,
+                    description:description
+                }
+                
+            }
+            response.render("addAbout.hbs",model)
+        }
+    }
+})
+
 
 app.get('/addProject', function(request,response){
     if(!request.session.isLoggedIn){
         response.redirect("/login")
     }else{
-        response.render("addProject.hbs")
+        response.render("addProject.hbs",{session:request.session})
     }
 })
 
@@ -226,6 +310,41 @@ app.post('/addProject', upload, function(request,response){
             }
             response.render("addProject.hbs",model)
         }
+    }
+    
+})
+
+app.get('/deleteAbout/:id',function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        response.render("deleteAbout.hbs",{id})
+    }
+    
+})
+
+app.post('/deleteAbout/:id', function(request,response){
+    if(!request.session.isLoggedIn){
+        response.redirect("/login")
+    }else{
+        const id = request.params.id
+        const query = `DELETE FROM about WHERE id =?`
+        const values = [id]
+        db.run(query, values,function(error){
+            if (error){
+                const errorMessages = []
+                errorMessages.push("Internal Server Error")
+                response.render("deleteAbout.hbs",{errorMessages})
+            }else{
+                const model = {
+                    id,
+                    session:request.session,
+                }
+                response.redirect('/about')
+            }
+            
+        })
     }
     
 })
