@@ -7,9 +7,9 @@
                 <tr>
                     <td>{{title}}</td>
                     <td>
-                        <a href="/viewExperience/{{id}}" type="button">View</a>
-                        <a href="/editExperience/{{id}}" type="button">Edit</a>
-                        <a href="/deleteExperience/{{id}}" type="button">Delete</a>
+                        <a href="/experiences/read/{{id}}" type="button">View</a>
+                        <a href="/experiences/edit/{{id}}" type="button">Edit</a>
+                        <a href="/experiences/delete/{{id}}" type="button">Delete</a>
                     </td>
                 </tr>
                 {{/each}}
@@ -21,6 +21,6 @@
     </div>
     {{/if}}
     <div>
-        <a href="/addExperience" ><button>Add New Experience</button></a>
+        <a href="/experiences/create" ><button>Add</button></a>
     </div>
 </div>

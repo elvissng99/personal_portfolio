@@ -1,21 +1,23 @@
 <header>
-    <img class="logo" src="/ES logo.jpg" alt="logo">
+    {{!-- <img class="logo" src="/ES logo.jpg" alt="logo"> --}}
+    <div class="logo"><a class="logo" href="/login">𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌</a></div>
     <nav>
         <ul class = 'nav__links'>
+            <li><a href="/">Home</a></li>
             {{#if session.email}}
-                <li><a href="/admin">Home</a></li>
+                <li><a href="/about/admin">About</a></li>
+                <li><a href="/experiences/admin">Experiences</a></li>
             {{else}}
-                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/experiences">Experiences</a></li>
             {{/if}}
-            
-            <li><a href="/about">About</a></li>
-            <li><a href="/resume">Resume</a></li>
+            <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>
-    {{#if session.email}}
+    {{!-- {{#if session.email}}
         <a class="cta" href="/logout"><button>Log Out</button></a>
     {{else}}
         <a class="cta" href="/login"><button>Login</button></a>
         
-    {{/if}}
+    {{/if}} --}}
 </header>

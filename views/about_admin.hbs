@@ -1,0 +1,26 @@
+<div>
+    {{#if about.length}}
+        <table border="1">
+            <caption>About Me</caption>
+            <tbody>
+                {{#each about}}
+                <tr>
+                    <td>{{title}}</td>
+                    <td>{{description}}</td>
+                    <td>
+                        <a href="/about/edit/{{id}}" type="button">Edit</a>
+                        <a href="/about/delete/{{id}}" type="button">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+    <div>
+        <p>NO DATA</p>
+    </div>
+    {{/if}}
+    <div>
+        <a href="/about/create" ><button>Add</button></a>
+    </div>
+</div>

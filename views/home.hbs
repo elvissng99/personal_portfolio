@@ -2,7 +2,8 @@
     {{#if home.length}}
         {{#each home}}
         <div>
-            <h2>{{introduction}}{{name}}</h3>
+            <p>{{introduction}}</p>
+            <h2>{{name}}</h2>
             <p>{{employment}}</p>
             <p>{{description}}</p>
             <br>
@@ -11,21 +12,6 @@
     {{else}}
     <div>
         <p>NO HOME DATA</p>
-    </div>
-    {{/if}}
-    {{#if experiences.length}}
-        <h3>Experiences</h3>
-        {{#each experiences}}
-        
-        <div>
-            <a href = "/viewExperience/{{id}}"><strong>{{title}}</strong></a>
-            <p>{{description}}</p>
-            <br>
-        </div>
-        {{/each}}
-    {{else}}
-    <div>
-        <p>NO EXPERIENCES DATA</p>
     </div>
     {{/if}}
 </div>

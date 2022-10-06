@@ -26,6 +26,7 @@ header{
 .logo {
   cursor: pointer;
   margin-right: auto;
+  font-size:xx-large;
 }
 
 .nav__links {

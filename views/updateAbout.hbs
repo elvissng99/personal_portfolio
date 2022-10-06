@@ -1,0 +1,7 @@
+<div>
+    {{#each about}}
+    <form method="POST" action="/about/edit/{{id}}">
+            {{>about_form}}
+    </form>
+    {{/each}}
+</div>
