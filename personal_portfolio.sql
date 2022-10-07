@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2022 at 04:37 PM
+-- Generation Time: Oct 07, 2022 at 09:01 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `about` (
   `id` int(11) NOT NULL,
-  `description` varchar(256) NOT NULL
+  `description` varchar(512) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -37,11 +37,11 @@ CREATE TABLE `about` (
 --
 
 INSERT INTO `about` (`id`, `description`) VALUES
-(1, 'I love being around people, collaborating with others and communicating my thoughts!'),
-(2, 'UX lets me dive into a different perspective and empathise with my users to solve their needs.'),
-(3, 'As a computer science major, I can utilise my technical knowledge to understand technical limitations and communicate with developers'),
-(4, 'I learned and applied user research and testing, as well as UI and prototyping knowledge through case studies, design challenges, real life projects and internships!'),
-(5, 'I look forward to learning- 3D design in Spline, Video animation in AfterEffects, design for VR/AR/XR and many more!');
+(1, 'Looking back to my first time I explored Computer Science, I first started learning the basics of Python and thoroughly enjoyed it. It felt like a problem solving game and I still feel the same now.'),
+(2, 'During my first internship before starting university, I was exposed to front-end mobile development using React Native. This kickstarted my passion in Computer Science as I went beyond the basics of a programming language and learnt about how software engineering is in general from my kind mentors and colleagues.'),
+(3, 'I gained an understanding in route optimisation in my second internship where I specialised in developing algorithms for the Vehicle Routing Problem (VRP).'),
+(4, 'The time spent in my university thus far has been extremely fruitful, learning important fundamental concepts such as Data Structures, Database Architecture, Object Orientated Programming and Algorithm Design.'),
+(5, 'I have enjoyed every part of my journey in Computer Science thus far and am still open to exploring new areas of study!');
 
 -- --------------------------------------------------------
 
@@ -60,10 +60,9 @@ CREATE TABLE `experiences` (
 --
 
 INSERT INTO `experiences` (`id`, `title`, `description`) VALUES
-(1, 'company 1', 'working for company 1asdasd'),
+(1, 'company 1', 'worked for company 1'),
 (2, 'company 2', 'work for company 2'),
-(3, 'company 3', 'work for company 3'),
-(21, 'new company', 'newjsnrekljbsnds');
+(24, 'company 3', 'work for company 3');
 
 -- --------------------------------------------------------
 
@@ -84,7 +83,27 @@ CREATE TABLE `home` (
 --
 
 INSERT INTO `home` (`id`, `introduction`, `employment`, `description`, `name`) VALUES
-(1, 'Hi, I am ', 'Computer Science student at Nanyang Technological University', 'Using curiosity and problem solving, I collaborate to design impactful solution!', 'Kaitao');
+(1, 'Hi, my name is', 'Aspiring Software Engineer', 'I am currently a student in Nanyang Technological University. Still on a journey to find out my true passion in Computer Science', 'Elvis Sng');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skills`
+--
+
+CREATE TABLE `skills` (
+  `id` int(11) NOT NULL,
+  `name` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `skills`
+--
+
+INSERT INTO `skills` (`id`, `name`) VALUES
+(4, 'Javascript'),
+(5, 'Express'),
+(12, 'Python');
 
 --
 -- Indexes for dumped tables
@@ -109,6 +128,12 @@ ALTER TABLE `home`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -116,19 +141,25 @@ ALTER TABLE `home`
 -- AUTO_INCREMENT for table `about`
 --
 ALTER TABLE `about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `experiences`
 --
 ALTER TABLE `experiences`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `home`
 --
 ALTER TABLE `home`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
