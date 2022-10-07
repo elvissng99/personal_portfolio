@@ -1,5 +1,6 @@
 const mysql = require('mysql')
 const bcrypt = require("bcrypt");
+const { response } = require('express');
 
 const pool = mysql.createPool({
     connectionLimit : 100,
@@ -12,7 +13,7 @@ ADMIN_PASSWORD = '$2b$10$q2BLb2IB7TiKiEPuPrTqT.JCO/aWovTSc.qXcL21C5HeTxYgPdhdW'
 
 exports.home = (req,res)=>{
     pool.getConnection((err,connection)=>{
-        if(err) throw err
+        if(err) res.render('error')
         console.log("Connected as ID" + connection.threadId)
         connection.query('SELECT * FROM home;',(err, home)=>{
             connection.release()
@@ -21,7 +22,7 @@ exports.home = (req,res)=>{
                     home: home
                 })
             }else{
-                throw err
+                res.render('error')
             }
             
         })
@@ -30,14 +31,20 @@ exports.home = (req,res)=>{
 
 exports.about = (req,res)=>{
     pool.getConnection((err,connection)=>{
-        if(err) throw err
+        if(err) res.render('error')
         console.log("Connected as ID" + connection.threadId)
         connection.query('SELECT * FROM about;',(err, about)=>{
             if(!err){
-                connection.release()
-                res.render('about',{about})
+                connection.query('SELECT * FROM skills;',(err, skills)=>{
+                    connection.release()
+                    if(!err){
+                        res.render('about',{about, skills})
+                    }else{
+                        res.render('error')
+                    }
+                })
             }else{
-                throw err
+                res.render('error')
             }
         })
     })
@@ -45,7 +52,7 @@ exports.about = (req,res)=>{
 
 exports.experiences = (req,res)=>{
     pool.getConnection((err,connection)=>{
-        if(err) throw err
+        if(err) res.render('error')
         console.log("Connected as ID" + connection.threadId)
         connection.query('SELECT * FROM experiences;',(err, experiences)=>{
             connection.release()
@@ -54,7 +61,7 @@ exports.experiences = (req,res)=>{
                     experiences: experiences,
                 })
             }else{
-                throw err
+                res.render('error')
             }
         })
     })
@@ -65,14 +72,7 @@ exports.contact = (req,res)=>{
 }
 
 exports.login = (req,res)=>{
-    const error = req.query.error;
-    if (error == 1){
-        res.render("login",{error:error})
-    }else{
-        res.render("login")
-    }
-    
-    
+    res.render("login")
 }
 
 exports.validate = (req,res)=>{
@@ -83,38 +83,40 @@ exports.validate = (req,res)=>{
                 req.session.email = email
                 res.redirect('/')
             }else{
-                res.redirect('/login/?error=1');
+                res.render('login',{
+                    error: "Invalid email and/or password"
+                })
             }
         })
     }else{
-        res.redirect('/login/?error=1');
+        res.render('login',{
+            error: "Invalid email and/or password"
+        })
     }    
 }
 
 exports.logout = (req,res)=>{
-    req.session.destroy(function(err){
-        if (err){
-            throw err
-        }else{
-            res.redirect("/login")
-        }
-    })   
+    if (req.session.email){
+        req.session.destroy(function(err){
+            if (err){
+                res.render('error')
+            }
+        })  
+    }
+    res.redirect("/")
 }
 
 exports.experiences_admin = (req,res)=>{
-    console.log("vfajlsfngvaeknf")
     if (req.session.email){
-        console.log("hello")
         pool.getConnection((err,connection)=>{
-            if(err) throw err
+            if(err) res.render('error')
             console.log("Connected as ID" + connection.threadId)
             connection.query('SELECT * FROM experiences;',(err, experiences)=>{
                 connection.release()
                 if(!err){
-                    console.log(experiences)
                     res.render('experiences_admin',{experiences})
                 }else{
-                    throw err
+                    res.render('error')
                 }
             })
         })
@@ -126,14 +128,20 @@ exports.experiences_admin = (req,res)=>{
 exports.about_admin = (req,res)=>{
     if (req.session.email){
         pool.getConnection((err,connection)=>{
-            if(err) throw err
+            if(err) res.render('error')
             console.log("Connected as ID" + connection.threadId)
             connection.query('SELECT * FROM about;',(err, about)=>{
-                connection.release()
                 if(!err){
-                    res.render('about_admin',{about})
+                    connection.query('SELECT * FROM skills;',(err, skills)=>{
+                        connection.release()
+                        if(!err){
+                            res.render('about_admin',{about, skills})
+                        }else{
+                            res.render('error')
+                        }
+                    })
                 }else{
-                    throw err
+                    res.render('error')
                 }
             })
         })

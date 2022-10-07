@@ -47,36 +47,6 @@ app.use('/',route_navigation)
 const route_about = require("./server/routes/about")
 app.use('/',route_about)
 
-// app.get('/', (req,res)=>{
-//     const context = data
-//     res.render('main',context)
-// })
-
-// app.get('/admin', (req,res)=>{
-//     const context = data
-//     res.render('admin',context)
-// })
-
-// app.get('/login', (req,res)=>{
-//     const context = data
-//     res.render('login',context)
-// })
-
-// app.get('/experiences', (req,res)=>{
-//     const context = data
-//     res.render('experiences',context)
-// })
-
-// app.get('/contact', (req,res)=>{
-//     const context = data
-//     res.render('contact',context)
-// })
-
-// app.get('/about', (req,res)=>{
-//     const context = data
-//     res.render('about',context)
-// })
-
 app.listen(port, ()=>{
     console.log(`Listening on port ${port}`)
 })

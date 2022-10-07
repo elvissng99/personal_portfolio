@@ -6,13 +6,14 @@
             <div>
                 <input name="password" type="password" placeholder="Enter Password">
             </div>
+            {{#if error}}
+                <div>
+                    {{error}}
+                </div>
+            {{/if}}
             <div>
                 <button type="submit">Login</button><a href="../"><button type="button">Back</button></a>
             </div>
-            {{#if error}}
-                <div>
-                    WRONG WRONG WRONG
-                </div>
-            {{/if}}
+            
     </form>
 </div>

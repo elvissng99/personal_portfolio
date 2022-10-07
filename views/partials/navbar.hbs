@@ -1,6 +1,10 @@
 <header>
     {{!-- <img class="logo" src="/ES logo.jpg" alt="logo"> --}}
-    <div class="logo"><a class="logo" href="/login">𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌</a></div>
+    {{#if session.email}}
+        <div class="logo"><a class="logo" href="/logout">𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌</a></div>
+    {{else}}
+        <div class="logo"><a class="logo" href="/login">𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌</a></div>
+    {{/if}}
     <nav>
         <ul class = 'nav__links'>
             <li><a href="/">Home</a></li>
@@ -14,10 +18,4 @@
             <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>
-    {{!-- {{#if session.email}}
-        <a class="cta" href="/logout"><button>Log Out</button></a>
-    {{else}}
-        <a class="cta" href="/login"><button>Login</button></a>
-        
-    {{/if}} --}}
 </header>

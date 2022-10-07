@@ -43,7 +43,7 @@ header{
 }
 
 .nav__links li a:hover{
-  color: #0088a9
+  color: rgba(76, 217, 198)
 }
 
 button{
@@ -57,5 +57,21 @@ button{
 }
 
 button:hover{
-  background-color: rgba(39, 179, 106,0.8);
+  background-color: rgba(39, 179, 106,0.6);
+}
+
+.delete {
+  background-color: rgba(76, 170, 250);
+}
+.delete:hover{
+  background-color: red;
+}
+
+.skill {
+  color: rgba(76, 217, 198);
+}
+
+.skills{
+  column-count: 2;
+  list-style:disc
 }

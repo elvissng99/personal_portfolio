@@ -7,109 +7,172 @@ const pool = mysql.createPool({
     database: process.env.DB_NAME
 })
 
+const TITLE_MAX_LENGTH = 128
+const DESCRIPTION_MAX_LENGTH = 1000
+
 exports.create_form = (req,res)=>{
-    res.render("createExperience");
+    if (req.session.email){
+        res.render("createExperience");
+    }else{
+        res.redirect('/login')
+    }
 }
 
 exports.create = (req,res)=>{
-    const{title,description} = req.body
+    if (req.session.email){
+        const{title,description} = req.body
+        const errorMessages = []
+        if (title == ""){
+            errorMessages.push("Title can't be empty")
+        }else if (TITLE_MAX_LENGTH < title.length){
+            errorMessages.push("Title may be at most " + TITLE_MAX_LENGTH + " characters long")
+        }
 
-    pool.getConnection((err,connection)=>{
-        if(err) throw err
-        console.log("Connected as ID" + connection.threadId)
-        
-        connection.query('INSERT INTO experiences SET title = ?, description = ?',[title,description],(err, experiences)=>{
-            if(!err){
-                connection.query('SELECT * FROM experiences;',(err, experiences)=>{
-                    connection.release()
+        if (description == ""){
+            errorMessages.push("Description can't be empty")
+        }else if (DESCRIPTION_MAX_LENGTH < description.length){
+            errorMessages.push("Description may be at most " + DESCRIPTION_MAX_LENGTH + " characters long")
+        }
+        if (errorMessages.length ==0){
+            pool.getConnection((err,connection)=>{
+                if(err) res.render('error')
+                console.log("Connected as ID" + connection.threadId)
+                connection.query('INSERT INTO experiences SET title = ?, description = ?',[title,description],(err, experiences)=>{
                     if(!err){
-                        res.render('experiences_admin',{experiences})
+                        connection.query('SELECT * FROM experiences;',(err, experiences)=>{
+                            connection.release()
+                            if(!err){
+                                res.render('experiences_admin',{experiences})
+                            }else{
+                                res.render('error')
+                            }
+                        })
                     }else{
-                        throw err
+                        res.render('error')
                     }
                 })
-            }else{
-                throw err
-            }
-        })
-    })
-
+            })
+        }else{
+            res.render('createExperience',{
+                title,
+                description,
+                errorMessages
+            })
+        }
+        
+    }else{
+        res.redirect('/login')
+    }
 }
 
 exports.read = (req,res)=>{
-    pool.getConnection((err,connection)=>{
-        if(err) throw err
-        console.log("Connected as ID" + connection.threadId)
-        connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
-            connection.release()
-            if(!err){
-                res.render('readExperience',{experiences})
-            }else{
-                throw err
-            }
+    if (req.session.email){
+        pool.getConnection((err,connection)=>{
+            if(err) res.render('error')
+            console.log("Connected as ID" + connection.threadId)
+            connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
+                connection.release()
+                if(!err){
+                    res.render('readExperience',{experiences})
+                }else{
+                    res.render('error')
+                }
+            })
         })
-    })
+    }else{
+        res.redirect('/login')
+    }
 }
 
 exports.update_form = (req,res)=>{
-    pool.getConnection((err,connection)=>{
-        if(err) throw err
-        console.log("Connected as ID" + connection.threadId)
-        
-        connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
-            connection.release()
-            if(!err){
-                res.render('updateExperience',{experiences})
-            }else{
-                throw err
-            }
+    if (req.session.email){
+        pool.getConnection((err,connection)=>{
+            if(err) res.render('error')
+            console.log("Connected as ID" + connection.threadId)
+            connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
+                connection.release()
+                if(!err){
+                    res.render('updateExperience',experiences[0])
+                }else{
+                    res.render('error')
+                }
+            })
         })
-    })
+    }else{
+        res.redirect('/login')
+    }
 }
 
 exports.update = (req,res)=>{
-    
-    const{title,description} = req.body
-    pool.getConnection((err,connection)=>{
-        if(err) throw err
-        console.log("Connected as ID" + connection.threadId)
-        
-        connection.query('UPDATE experiences SET title = ?, description = ? WHERE id = ?',[title,description,req.params.id],(err, experiences)=>{
-            if(!err){
-                connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
-                    connection.release()
+    if (req.session.email){
+        const{title,description} = req.body
+        const errorMessages = []
+        if (title == ""){
+            errorMessages.push("Title can't be empty")
+        }else if (TITLE_MAX_LENGTH < title.length){
+            errorMessages.push("Title may be at most " + TITLE_MAX_LENGTH + " characters long")
+        }
+
+        if (description == ""){
+            errorMessages.push("Description can't be empty")
+        }else if (DESCRIPTION_MAX_LENGTH < description.length){
+            errorMessages.push("Description may be at most " + DESCRIPTION_MAX_LENGTH + " characters long")
+        }
+
+        if(errorMessages.length == 0){
+            pool.getConnection((err,connection)=>{
+                if(err) res.render('error')
+                console.log("Connected as ID" + connection.threadId)
+                connection.query('UPDATE experiences SET title = ?, description = ? WHERE id = ?',[title,description,req.params.id],(err, experiences)=>{
                     if(!err){
-                        res.render('updateExperience',{experiences})
+                        connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
+                            connection.release()
+                            if(!err){
+                                res.render('updateExperience',experiences[0])
+                            }else{
+                                res.render('error')
+                            }
+                        })
                     }else{
-                        throw err
+                        res.render('error')
                     }
                 })
-            }else{
-                throw err
-            }
-        })
-    })
-
+            })
+        }else{
+            res.render('updateExperience',{
+                id: req.params.id,
+                title,
+                description,
+                errorMessages
+            })
+        }
+        
+    }else{
+        res.redirect('/login')
+    }
 }
 
 exports.delete = (req,res)=>{
-    pool.getConnection((err,connection)=>{
-        if(err) throw err
-        console.log("Connected as ID" + connection.threadId)
-        
-        connection.query('DELETE FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
-            if(!err){
-                connection.query('SELECT * FROM experiences;',(err, experiences)=>{
-                    connection.release()
-                    if(!err){
-                        res.render('experiences_admin',{experiences})
-                    }else{
-                        throw err
-                    }
-                })
-            }else{
-                throw err
-            }
+    if (req.session.email){
+        pool.getConnection((err,connection)=>{
+            if(err) res.render('error')
+            console.log("Connected as ID" + connection.threadId)
+            connection.query('DELETE FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
+                if(!err){
+                    connection.query('SELECT * FROM experiences;',(err, experiences)=>{
+                        connection.release()
+                        if(!err){
+                            res.render('experiences_admin',{experiences})
+                        }else{
+                            res.render('error')
+                        }
+                    })
+                }else{
+                    res.render('error')
+                }
+            })
         })
-    })
+    }else{
+        res.redirect('/login')
+    }
 }
