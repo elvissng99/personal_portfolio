@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+  background-color: #24252A;
+}
+
+li,a,button,div,input,textarea{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #edf0f1;
+  text-decoration: none;
+
+}
+
+header{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 30px 5%;
+}
+
+.logo {
+  cursor: pointer;
+  margin-right: auto;
+  font-size:xx-large;
+}
+
+.nav__links {
+  list-style: none;
+}
+
+.nav__links li{
+  display: inline-block;
+}
+
+.nav__links li a{
+  transition: all 0.3s ease 0s;
+  padding: 0px 20px;
+}
+
+.nav__links li a:hover{
+  color: rgba(76, 217, 198)
+}
+
+button{
+  padding: 9px 25px;
+  margin-left: 15px;
+  background-color: rgba(39, 179, 106,1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+button:hover{
+  background-color: rgba(39, 179, 106,0.6);
+}
+
+.delete {
+  background-color: rgba(76, 170, 250);
+}
+.delete:hover{
+  background-color: red;
+}
+
+.skill {
+  color: rgba(76, 217, 198);
+}
+
+.skills{
+  column-count: 2;
+  list-style:disc
+}

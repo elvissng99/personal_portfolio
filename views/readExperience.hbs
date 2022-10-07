@@ -1,0 +1,13 @@
+<div>
+    {{#each experiences}}
+        <p>{{title}}</p>
+        <p>{{description}}</p>
+    {{/each}}
+    
+    {{#if session.email}}
+        <a href="/experiences/admin"><button>Back</button></a>
+    {{else}}
+        <a href="/experiences"><button>Back</button></a>
+    {{/if}}
+    
+</div>

@@ -1,0 +1,17 @@
+<div>
+    {{#if home.length}}
+        {{#each home}}
+        <div>
+            <p>{{introduction}}</p>
+            <h2>{{name}}</h2>
+            <p>{{employment}}</p>
+            <p>{{description}}</p>
+            <br>
+        </div>
+        {{/each}}
+    {{else}}
+    <div>
+        <p>NO HOME DATA</p>
+    </div>
+    {{/if}}
+</div>

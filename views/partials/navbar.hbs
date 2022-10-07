@@ -1,0 +1,21 @@
+<header>
+    {{!-- <img class="logo" src="/ES logo.jpg" alt="logo"> --}}
+    {{#if session.email}}
+        <div class="logo"><a class="logo" href="/logout">𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌</a></div>
+    {{else}}
+        <div class="logo"><a class="logo" href="/login">𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌</a></div>
+    {{/if}}
+    <nav>
+        <ul class = 'nav__links'>
+            <li><a href="/">Home</a></li>
+            {{#if session.email}}
+                <li><a href="/about/admin">About</a></li>
+                <li><a href="/experiences/admin">Experiences</a></li>
+            {{else}}
+                <li><a href="/about">About</a></li>
+                <li><a href="/experiences">Experiences</a></li>
+            {{/if}}
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>

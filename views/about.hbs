@@ -1,0 +1,27 @@
+<div>
+    <h3>About Me</h3>
+    {{#if about.length}}
+        <ul style="list-style: none;">
+            {{#each about}}
+                <li>{{description}}</li>
+            {{/each}}
+        </ul>
+    {{else}}
+        NO ABOUT DATA
+    {{/if}}
+
+    {{#if skills.length}}
+        <div>
+            <ul class = 'skills'>
+                {{#each skills}}
+                    <li class="skill">{{name}}</li>  
+                {{/each}}
+            </ul>
+        </div>
+        
+    {{else}}
+        NO SKILLS DATA
+    {{/if}}
+
+    <img class="about_picture" src="/about_picture.jpg" alt="about_picture">
+</div>
