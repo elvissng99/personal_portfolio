@@ -71,14 +71,27 @@ button:hover{
   color: rgba(76, 217, 198);
 }
 
+.descriptionlist{
+  margin-top: 10px;
+}
+
+
 .skills{
   column-count: 2;
-  list-style:disc
+  list-style:disc;
 }
 
 .container{
   width: 50%;
   margin: auto;
+}
+
+.aboutcontainer{
+  display: flex;
+  flex-direction:row;
+  width: 80%;
+  margin: auto;
+  column-gap: 20px;
 }
 
 .fromtop{
@@ -87,4 +100,9 @@ button:hover{
 
 .between{
   margin-top: 30px;
+}
+
+.aboutpic img{
+  width: 400px;
+  height: auto;
 }

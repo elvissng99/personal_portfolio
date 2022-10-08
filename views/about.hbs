@@ -1,12 +1,13 @@
-<div class = "container">
+<div class = "aboutcontainer">
     <div class = "fromtop">
         <h2>About Me</h2>
-    </div>
     {{#if about.length}}
         <div class = "between">
             <ul style="list-style: none;">
                 {{#each about}}
-                    <li>{{description}}</li>
+                    <div class = "descriptionlist">
+                        <li>{{description}}</li>
+                    </div>
                 {{/each}}
             </ul>
         </div>
@@ -26,10 +27,14 @@
                 {{/each}}
             </ul>
         </div>
+    
+    </div>
         
     {{else}}
         NO SKILLS DATA
     {{/if}}
 
-    <img class="about_picture" src="/about_picture.jpg" alt="about_picture">
+        <div class = "aboutpic fromtop">
+            <img class="about_picture" src="/about_picture.jpg" alt="about_picture">
+        </div>
 </div>
