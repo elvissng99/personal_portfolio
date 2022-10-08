@@ -75,3 +75,16 @@ button:hover{
   column-count: 2;
   list-style:disc
 }
+
+.container{
+  width: 50%;
+  margin: auto;
+}
+
+.fromtop{
+  margin-top: 100px;
+}
+
+.between{
+  margin-top: 30px;
+}
