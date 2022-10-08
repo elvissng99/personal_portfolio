@@ -1,10 +1,11 @@
-<div>
+<div class = "experiencescontainer fromtop">
     {{#if experiences.length}}
         <h3>Experiences</h3>
+        <br>
         {{#each experiences}}
         
         <div>
-            <a href = "/experiences/{{id}}"><strong>{{title}}</strong></a>
+            <strong>{{title}}</strong>
             <p>{{description}}</p>
             <br>
         </div>

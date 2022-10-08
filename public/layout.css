@@ -94,6 +94,11 @@ button:hover{
   column-gap: 20px;
 }
 
+.experiencescontainer{
+  width: 15%;
+  margin: auto;
+}
+
 .fromtop{
   margin-top: 100px;
 }
