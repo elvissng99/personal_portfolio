@@ -18,7 +18,7 @@
             </table>
         </div>
     {{else}}
-        <div>
+        <div class = "errormessage">
             <p>NO ABOUT ME DATA</p>
         </div>
     {{/if}}
@@ -36,7 +36,7 @@
             {{/each}}
         </div>
         {{else}}
-            <div>
+            <div class = "errormessage">
                 <p>NO SKILLS DATA</p>
             </div>
         {{/if}}
@@ -46,7 +46,9 @@
                 <button type="submit">Add Skill</button>
                 {{#if errorMessages.length}}
                     {{#each errorMessages}}
-                        <p>{{this}}</p>
+                        <div class = "errormessage">
+                            <p>{{this}}</p>
+                        </div>
                     {{/each}}
                 {{/if}}
             </form>

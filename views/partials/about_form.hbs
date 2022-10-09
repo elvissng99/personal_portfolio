@@ -1,4 +1,4 @@
-<div class = "aboutformconatiner">
+<div class = "aboutinfocontainer">
     <div>
         <h3>Add New About Information</h3>
     </div>
@@ -6,7 +6,7 @@
         <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{description}}</textarea>
     </div>
     {{#if errorMessages.length}}
-        <div>
+        <div class = "errormessage">
             {{#each errorMessages}}
                 <p>{{this}}</p>
             {{/each}}

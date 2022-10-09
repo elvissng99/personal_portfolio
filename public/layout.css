@@ -119,6 +119,18 @@ button:hover{
   margin: auto;
 }
 
+.readcontainer{
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  margin: auto;
+  row-gap: 10px;
+}
+
+.increaseheight textarea{
+  height: 200px;
+}
+
 .loginfield input{
   width: 100%;
   margin-top: 10px;
@@ -133,13 +145,31 @@ button:hover{
   margin: auto;
 }
 
-.aboutformconatiner{
+.aboutformcontainer{
   display: flex;
   flex-direction: column;
   width: 25%;
   margin: auto;
   margin-top: 20px;
   row-gap: 10px;
+}
+
+.aboutinfocontainer{
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin: auto;
+  margin-top: 20px;
+  row-gap: 10px;
+}
+
+.aboutinfocontainer input,textarea{
+  width: 100%;
+  height: 200px;
+}
+
+.aboutformcontainer input,textarea{
+  width: 100%;
 }
 
 .loginbuttoncontainer{
@@ -172,4 +202,8 @@ button:hover{
 .aboutpic img{
   width: 400px;
   height: auto;
+}
+
+.errormessage{
+  color: red;
 }
