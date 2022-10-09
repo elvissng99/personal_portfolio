@@ -133,6 +133,15 @@ button:hover{
   margin: auto;
 }
 
+.aboutformconatiner{
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin: auto;
+  margin-top: 20px;
+  row-gap: 10px;
+}
+
 .loginbuttoncontainer{
   display: flex;
   flex-direction: row;
