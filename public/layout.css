@@ -120,6 +120,31 @@ button:hover{
   margin: auto;
 }
 
+.loginfield input{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.fromtopmin{
+  margin-top: 30px;
+}
+
+.logincontainer{
+  width: 15%;
+  margin: auto;
+}
+
+.loginbuttoncontainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.loginbuttoncontainer button{
+  margin-left: 0;
+}
+
 .fromtop{
   margin-top: 100px;
 }
