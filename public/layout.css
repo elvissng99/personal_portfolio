@@ -48,7 +48,6 @@ header{
 
 button{
   padding: 9px 25px;
-  margin-left: 15px;
   background-color: rgba(39, 179, 106,1);
   border: none;
   border-radius: 50px;
@@ -143,6 +142,14 @@ button:hover{
 
 .loginbuttoncontainer button{
   margin-left: 0;
+}
+
+.aboutadmincontainer{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  row-gap: 20px;
 }
 
 .fromtop{
