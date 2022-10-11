@@ -1,22 +1,24 @@
-<div>
+<div class = "aboutadmincontainer">
     {{#if about.length}}
-        <table border="1">
-            <caption>About Me</caption>
-            <tbody>
-                {{#each about}}
-                    <tr>
-                        <td>{{title}}</td>
-                        <td>{{description}}</td>
-                        <td>
-                            <a href="/about/update/{{id}}" type="button">Edit</a>
-                            <a href="/about/delete/{{id}}" type="button">Delete</a>
-                        </td>
-                    </tr>
-                {{/each}}
-            </tbody>
-        </table>
+        <div class = "fromtopmin">
+            <table border="1">
+                <caption>About Me</caption>
+                <tbody>
+                    {{#each about}}
+                        <tr>
+                            <td>{{title}}</td>
+                            <td>{{description}}</td>
+                            <td>
+                                <a href="/about/update/{{id}}" type="button">Edit</a>
+                                <a href="/about/delete/{{id}}" type="button">Delete</a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     {{else}}
-        <div>
+        <div class = "errormessage">
             <p>NO ABOUT ME DATA</p>
         </div>
     {{/if}}
@@ -27,23 +29,29 @@
     <div>
         {{#if skills.length}}
             <p><caption>Skills</caption></p>
-                {{#each skills}}
-                    <a href="/skills/delete/{{id}}"><button class = "delete" type="button">{{name}} ✖</button></a>
-                {{/each}}
+    </div>
+        <div>
+            {{#each skills}}
+                <a href="/skills/delete/{{id}}"><button class = "delete" type="button">{{name}} ✖</button></a>
+            {{/each}}
+        </div>
         {{else}}
-            <div>
+            <div class = "errormessage">
                 <p>NO SKILLS DATA</p>
             </div>
         {{/if}}
-        <form method="POST" action="/about/admin">
-            <input type="text" name="skill" placeholder="Enter Skill" value={{skill}}>
-            <button type="submit">Add Skill</button>
-            {{#if errorMessages.length}}
-                {{#each errorMessages}}
-                    <p>{{this}}</p>
-                {{/each}}
-            {{/if}}
-        </form>
-    </div>
+        <div>
+            <form method="POST" action="/about/admin">
+                <input type="text" name="skill" placeholder="Enter Skill" value={{skill}}>
+                <button type="submit">Add Skill</button>
+                {{#if errorMessages.length}}
+                    {{#each errorMessages}}
+                        <div class = "errormessage">
+                            <p>{{this}}</p>
+                        </div>
+                    {{/each}}
+                {{/if}}
+            </form>
+        </div>
     
 </div>
