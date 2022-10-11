@@ -1,26 +1,28 @@
-<div>
+<div class = "readcontainer">
     {{#if experiences.length}}
-        <table border="1">
-            <caption>Experiences</caption>
-            <tbody>
-                {{#each experiences}}
-                <tr>
-                    <td>{{title}}</td>
-                    <td>
-                        <a href="/experiences/read/{{id}}" type="button">View</a>
-                        <a href="/experiences/update/{{id}}" type="button">Edit</a>
-                        <a href="/experiences/delete/{{id}}" type="button">Delete</a>
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+        <div class = "fromtopmin">
+            <table border="1">
+                <caption>Experiences</caption>
+                <tbody>
+                    {{#each experiences}}
+                    <tr>
+                        <td>{{title}}</td>
+                        <td>
+                            <a href="/experiences/read/{{id}}" type="button">View</a>
+                            <a href="/experiences/update/{{id}}" type="button">Edit</a>
+                            <a href="/experiences/delete/{{id}}" type="button">Delete</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     {{else}}
-    <div>
-        <p>NO DATA</p>
-    </div>
+        <div>
+            <p>NO DATA</p>
+        </div>
     {{/if}}
-    <div>
-        <a href="/experiences/create" ><button>Add</button></a>
-    </div>
+        <div>
+            <a href="/experiences/create" ><button>Add</button></a>
+        </div>
 </div>

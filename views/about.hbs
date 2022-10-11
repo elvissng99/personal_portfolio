@@ -1,27 +1,40 @@
-<div>
-    <h3>About Me</h3>
+<div class = "aboutcontainer">
+    <div class = "fromtop">
+        <h2>About Me</h2>
     {{#if about.length}}
-        <ul style="list-style: none;">
-            {{#each about}}
-                <li>{{description}}</li>
-            {{/each}}
-        </ul>
+        <div class = "between">
+            <ul style="list-style: none;">
+                {{#each about}}
+                    <div class = "descriptionlist">
+                        <li>{{description}}</li>
+                    </div>
+                {{/each}}
+            </ul>
+        </div>
     {{else}}
         NO ABOUT DATA
     {{/if}}
 
+    <div class = "between">
+        <h3> Skills: </h3>
+    </div>
+
     {{#if skills.length}}
-        <div>
+        <div class = "between">
             <ul class = 'skills'>
                 {{#each skills}}
                     <li class="skill">{{name}}</li>  
                 {{/each}}
             </ul>
         </div>
+    
+    </div>
         
     {{else}}
         NO SKILLS DATA
     {{/if}}
 
-    <img class="about_picture" src="/about_picture.jpg" alt="about_picture">
+        <div class = "aboutpic fromtop">
+            <img class="about_picture" src="/about_picture.jpg" alt="about_picture">
+        </div>
 </div>

@@ -1,17 +1,19 @@
-<div>
+<div class = "experiencescontainer fromtopmin">
     {{#if experiences.length}}
-        <h3>Experiences</h3>
-        {{#each experiences}}
-        
         <div>
-            <a href = "/experiences/{{id}}"><strong>{{title}}</strong></a>
-            <p>{{description}}</p>
-            <br>
+            <h1>Experiences</h1>
         </div>
+            {{#each experiences}}
+                <div class = "fromtopmin">
+                    <h2>{{title}}</h2>
+                </div>
+                <div>
+                    <p>{{description}}</p>
+                </div>            
         {{/each}}
     {{else}}
-    <div>
-        <p>NO EXPERIENCES DATA</p>
-    </div>
+        <div class = "errormessage">
+            <p>NO EXPERIENCES DATA</p>
+        </div>
     {{/if}}
 </div>
