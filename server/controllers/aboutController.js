@@ -88,7 +88,11 @@ exports.update = (req,res)=>{
                 connection.query('UPDATE about SET description = ? WHERE id = ?',[description,req.params.id],(err, about)=>{
                     connection.release()
                     if(!err){
-                        res.redirect('/about/update/' + req.params.id)
+                        res.render('updateAbout',{
+                            id: req.params.id,
+                            description,
+                            isSuccessful:true
+                        })
                     }else{
                         res.render('error')
                     }

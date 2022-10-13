@@ -47,6 +47,9 @@ app.use('/',route_navigation)
 const route_about = require("./server/routes/about")
 app.use('/',route_about)
 
+const route_home = require("./server/routes/home")
+app.use('/',route_home)
+
 app.listen(port, ()=>{
     console.log(`Listening on port ${port}`)
 })

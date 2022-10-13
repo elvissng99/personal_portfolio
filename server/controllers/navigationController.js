@@ -81,7 +81,7 @@ exports.validate = (req,res)=>{
         bcrypt.compare(password, ADMIN_PASSWORD, function(err, result) {
             if (result == true){
                 req.session.email = email
-                res.redirect('/')
+                res.redirect('/admin')
             }else{
                 res.render('login',{
                     error: "Invalid email and/or password"
@@ -104,6 +104,25 @@ exports.logout = (req,res)=>{
         })  
     }
     res.redirect("/")
+}
+
+exports.home_admin = (req,res)=>{
+    if (req.session.email){
+        pool.getConnection((err,connection)=>{
+            if(err) res.render('error')
+            console.log("Connected as ID" + connection.threadId)
+            connection.query('SELECT * FROM home;',(err, home)=>{
+                connection.release()
+                if(!err){
+                    res.render('home_admin',{home})
+                }else{
+                    res.render('error')
+                }
+            })
+        })
+    }else{
+        res.redirect('/login')
+    }
 }
 
 exports.experiences_admin = (req,res)=>{
