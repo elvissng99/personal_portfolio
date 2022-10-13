@@ -128,7 +128,12 @@ exports.update = (req,res)=>{
                         connection.query('SELECT * FROM experiences WHERE id = ?;',[req.params.id],(err, experiences)=>{
                             connection.release()
                             if(!err){
-                                res.render('updateExperience',experiences[0])
+                                res.render('updateExperience',{
+                                    id: req.params.id,
+                                    title,
+                                    description,
+                                    isSuccessful:true
+                                })
                             }else{
                                 res.render('error')
                             }

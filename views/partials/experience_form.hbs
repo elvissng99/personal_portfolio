@@ -11,6 +11,11 @@
     <div>
         <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{description}}</textarea>
     </div>
+    {{#if isSuccessful}}
+        <div>
+            Updated Successfully
+        </div>
+    {{/if}}
     {{#if errorMessages.length}}
         <div class = "errormessage">
             {{#each errorMessages}}

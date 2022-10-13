@@ -7,11 +7,12 @@
     {{/if}}
     <nav>
         <ul class = 'nav__links'>
-            <li><a href="/">Home</a></li>
             {{#if session.email}}
+                <li><a href="/admin">Home</a></li>
                 <li><a href="/about/admin">About</a></li>
                 <li><a href="/experiences/admin">Experiences</a></li>
             {{else}}
+                <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/experiences">Experiences</a></li>
             {{/if}}

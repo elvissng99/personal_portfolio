@@ -1,0 +1,38 @@
+<div class = "container">
+    {{#if home.length}}
+        <form method="POST" action="">
+            {{#each home}}
+                <div>
+                    <input type="text" name="introduction" value="{{introduction}}" size="64">
+                </div>
+                <div>
+                    <input type="text" name="name" value="{{name}}" size="64">
+                </div>
+                <div>
+                    <input type="text" name="employment" value="{{employment}}" size="128">
+                </div>
+                <div>
+                    <input type="text" name="description" value="{{description}}" size="128">
+                </div>
+                <br>
+            {{/each}}
+            {{#if isSuccessful}}
+                <p>Updated Successfully</p>
+            {{/if}}
+            {{#if errorMessages.length}}
+                <div class = "errormessage">
+                    {{#each errorMessages}}
+                        <p>{{this}}</p>
+                    {{/each}}
+                </div>
+            {{/if}}
+            <div class = "loginbuttoncontainer">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    {{else}}
+        <div>
+            <p>NO HOME DATA</p>
+        </div>
+    {{/if}}
+</div>
