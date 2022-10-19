@@ -1,9 +1,9 @@
-<div class = "aboutinfocontainer">
+<div class = "aboutFormContainer">
     <div>
-        <h3>Description</h3>
+        <h2>Description</h2>
     </div>
     <div>
-        <textarea name="description" rows="4" cols="50" placeholder="Enter Description">{{description}}</textarea>
+        <textarea class="fontSize" name="description" rows="4" cols="50" placeholder="Enter Description">{{description}}</textarea>
     </div>
     {{#if isSuccessful}}
         <div>
@@ -17,7 +17,7 @@
             {{/each}}
         </div>
     {{/if}}
-    <div class = "loginbuttoncontainer">
+    <div class = "loginButtonContainer">
         <button type="submit">Submit</button><a href="/about/admin">
         <button type="button">Back</button></a>
     </div>

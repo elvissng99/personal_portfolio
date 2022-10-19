@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2022 at 08:02 PM
+-- Generation Time: Oct 19, 2022 at 04:23 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -38,10 +38,8 @@ CREATE TABLE `about` (
 
 INSERT INTO `about` (`id`, `description`) VALUES
 (1, 'Looking back to my first time I explored Computer Science, I first started learning the basics of Python and thoroughly enjoyed it. It felt like a problem solving game and I still feel the same now.'),
-(2, 'During my first internship before starting university, I was exposed to front-end mobile development using React Native. This kickstarted my passion in Computer Science as I went beyond the basics of a programming language and learnt about how software engineering is in general from my kind mentors and colleagues.'),
-(3, 'I gained an understanding in route optimisation in my second internship where I specialised in developing algorithms for the Vehicle Routing Problem (VRP).'),
-(4, 'The time spent in my university thus far has been extremely fruitful, learning important fundamental concepts such as Data Structures, Database Architecture, Object Orientated Programming and Algorithm Design.'),
-(5, 'I have enjoyed every part of my journey in Computer Science thus far and am still open to exploring new areas of study!');
+(2, 'During my first internship before starting university, I was exposed to front-end mobile development using React Native. I learnt about how software engineering works in general from my kind mentors and colleagues.'),
+(3, 'I gained an understanding in route optimisation in my second internship where I specialised in developing algorithms for the Vehicle Routing Problem (VRP).');
 
 -- --------------------------------------------------------
 
@@ -60,9 +58,8 @@ CREATE TABLE `experiences` (
 --
 
 INSERT INTO `experiences` (`id`, `title`, `description`) VALUES
-(1, 'company 1', 'worked for company 1'),
-(2, 'company 2', 'work for company 2'),
-(24, 'company 3', 'work for company 3');
+(1, 'vCargoCloud', 'Frontend Development with ReactNative!!'),
+(2, 'GUUD', 'Algorithm design and development for route optimisation');
 
 -- --------------------------------------------------------
 
@@ -101,9 +98,18 @@ CREATE TABLE `skills` (
 --
 
 INSERT INTO `skills` (`id`, `name`) VALUES
-(4, 'Javascript'),
-(5, 'Express'),
-(12, 'Python');
+(30, 'Python'),
+(32, 'Javascript'),
+(33, 'Express'),
+(38, 'Laravel'),
+(39, 'PHP'),
+(40, 'Java'),
+(41, 'AWS Cloud Practitioner'),
+(42, 'Data Structures'),
+(43, 'Algorithm Design'),
+(44, 'Algorithm Analysis'),
+(45, 'Object-Oriented Programming'),
+(47, 'SQL');
 
 --
 -- Indexes for dumped tables
@@ -141,13 +147,13 @@ ALTER TABLE `skills`
 -- AUTO_INCREMENT for table `about`
 --
 ALTER TABLE `about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `experiences`
 --
 ALTER TABLE `experiences`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `home`
@@ -159,7 +165,7 @@ ALTER TABLE `home`
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

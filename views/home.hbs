@@ -1,19 +1,20 @@
 <div class = "container">
     {{#if home.length}}
         {{#each home}}
-            <div class = "fromtop">
-                <p>{{introduction}}</p>
+            <div class = "homeContainer">
+                <div>
+                    <p>{{introduction}}</p>
+                </div>
+                <div class = "innerContainer">
+                    <h1>{{name}}</h1>
+                </div>
+                <div class = "innerContainer">
+                    <h2>{{employment}}</h2>
+                </div>
+                <div class = "innerContainer">
+                    <p>{{description}}</p>
+                </div>
             </div>
-            <div class = "between">
-                <h1>{{name}}</h1>
-            </div>
-            <div class = "between">
-                <h2>{{employment}}</h2>
-            </div>
-            <div class = "between">
-                <p>{{description}}</p>
-            </div>
-            <br>
         {{/each}}
     {{else}}
     <div>
