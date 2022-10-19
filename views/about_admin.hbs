@@ -1,8 +1,8 @@
-<div class = "aboutadmincontainer">
+<div class = "aboutAdminContainer">
     {{#if about.length}}
-        <div class = "fromtopmin">
+        <div>
             <table border="1">
-                <caption>About Me</caption>
+                <h2 class="centerText">About Me</h2>
                 <tbody>
                     {{#each about}}
                         <tr>
@@ -28,11 +28,11 @@
 
     <div>
         {{#if skills.length}}
-            <p><caption>Skills</caption></p>
+            <h2>Skills</h2>
     </div>
         <div>
             {{#each skills}}
-                <a href="/skills/delete/{{id}}"><button class = "delete" type="button">{{name}} ✖</button></a>
+                <a href="/skills/delete/{{id}}"><button class = "buttonContainer delete" type="button">{{name}} ✖</button></a>
             {{/each}}
         </div>
         {{else}}
@@ -43,7 +43,7 @@
         <div>
             <form method="POST" action="/about/admin">
                 <input type="text" name="skill" placeholder="Enter Skill" value={{skill}}>
-                <button type="submit">Add Skill</button>
+                <button class="buttonContainer" type="submit">Add Skill</button>
                 {{#if errorMessages.length}}
                     {{#each errorMessages}}
                         <div class = "errormessage">

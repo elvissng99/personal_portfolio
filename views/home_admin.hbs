@@ -1,18 +1,25 @@
 <div class = "container">
     {{#if home.length}}
-        <form method="POST" action="">
+        <form method="POST" action="" class="homeAdminContainer">
             {{#each home}}
-                <div>
-                    <input type="text" name="introduction" value="{{introduction}}" size="64">
+                <div class="innerContainer">
+                    <p>Introduction</p>
+                    <input type="text" name="introduction" value="{{introduction}}" size="40">
                 </div>
-                <div>
-                    <input type="text" name="name" value="{{name}}" size="64">
+                
+                <div class="innerContainer">
+                    <p>Name</p>
+                    <input type="text" name="name" value="{{name}}" size="40">
                 </div>
-                <div>
-                    <input type="text" name="employment" value="{{employment}}" size="128">
+                
+                <div class="innerContainer">
+                    <p>Employment</p>
+                    <input type="text" name="employment" value="{{employment}}" size="80">
                 </div>
-                <div>
-                    <input type="text" name="description" value="{{description}}" size="128">
+                
+                <div class="innerContainer">
+                    <p>Description</p>
+                    <input type="text" name="description" value="{{description}}" size="80">
                 </div>
                 <br>
             {{/each}}
@@ -26,7 +33,7 @@
                     {{/each}}
                 </div>
             {{/if}}
-            <div class = "loginbuttoncontainer">
+            <div class = "loginButtonContainer">
                 <button type="submit">Submit</button>
             </div>
         </form>

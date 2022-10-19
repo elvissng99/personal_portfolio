@@ -143,7 +143,7 @@ exports.createSkill= (req,res)=>{
             pool.getConnection((err,connection)=>{
                 if(err) res.render('error')
                 console.log("Connected as ID" + connection.threadId)
-                connection.query('INSERT INTO SKILLS SET name = ?',[skill],(err, skills)=>{
+                connection.query('INSERT INTO skills SET name = ?',[skill],(err, skills)=>{
                     connection.release()
                     if(!err){
                         res.redirect('/about/admin')

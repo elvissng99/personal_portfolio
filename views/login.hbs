@@ -1,15 +1,15 @@
-<div class = "logincontainer">
+<div class = "loginContainer">
     <form method="POST" action="">
-        <div class = "fromtop">
-            <h2> Username </h2>
+        <div>
+            <h2>Email</h2>
         </div>
-        <div class = "loginfield">
+        <div class = "loginField">
             <input name="email" type="email" placeholder="Enter Email">
         </div>
-        <div class = "fromtopmin">
-            <h2> Password </h2>
+        <div>
+            <h2>Password</h2>
         </div>
-        <div class = "loginfield">
+        <div class = "loginField">
             <input name="password" type="password" placeholder="Enter Password">
         </div>
             {{#if error}}
@@ -17,7 +17,7 @@
                     {{error}}
                 </div>
             {{/if}}
-            <div class = "loginbuttoncontainer">
+            <div class = "loginButtonContainer">
                 <div>
                     <button type="submit">Login</button>
                 </div>

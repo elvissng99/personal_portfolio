@@ -1,17 +1,19 @@
-<div class = "readcontainer">
-    {{#each experiences}}
-        <div class = "fromtopmin">
-            <h2>{{title}}</h2>
-        </div>
-        <div>
-            <p>{{description}}</p>
-        </div>  
-    {{/each}}
-        <div>
+<div class = "container">
+    <div class="experiencesContainer"> 
+        {{#each experiences}}
+            <div class="innerContainer">
+                <h2>{{title}}</h2>
+            </div>
+            <div>
+                <p class="fontSize">{{description}}</p>
+            </div>  
+        {{/each}}
+        <div class="experiencesContainer">
             {{#if session.email}}
                 <a href="/experiences/admin"><button>Back</button></a>
             {{else}}
                 <a href="/experiences"><button>Back</button></a>
             {{/if}}
         </div>  
+    </div>
 </div>
