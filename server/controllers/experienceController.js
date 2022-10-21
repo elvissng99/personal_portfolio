@@ -42,7 +42,7 @@ exports.create = (req,res)=>{
                         connection.query('SELECT * FROM experiences;',(err, experiences)=>{
                             connection.release()
                             if(!err){
-                                res.render('experiences_admin',{experiences})
+                                res.render('experiencesAdmin',{experiences})
                             }else{
                                 res.render('error')
                             }
@@ -167,7 +167,7 @@ exports.delete = (req,res)=>{
                     connection.query('SELECT * FROM experiences;',(err, experiences)=>{
                         connection.release()
                         if(!err){
-                            res.render('experiences_admin',{experiences})
+                            res.render('experiencesAdmin',{experiences})
                         }else{
                             res.render('error')
                         }

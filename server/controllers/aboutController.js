@@ -162,7 +162,7 @@ exports.createSkill= (req,res)=>{
                         connection.query('SELECT * FROM skills;',(err, skills)=>{
                             connection.release()
                             if(!err){
-                                res.render('about_admin',{about, skills,skill,errorMessages})
+                                res.render('aboutAdmin',{about, skills,skill,errorMessages})
                             }else{
                                 res.render('error')
                             }
