@@ -9,7 +9,7 @@ router.get('/contact', navigationController.contact)
 
 router.get('/login', navigationController.login)
 router.post('/login',navigationController.validate)
-router.get('/logout',navigationController.logout)
+router.post('/logout',navigationController.logout)
 
 router.get('/admin',navigationController.home_admin)
 router.get('/experiences/admin', navigationController.experiences_admin)

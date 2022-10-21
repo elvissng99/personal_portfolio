@@ -5,12 +5,14 @@
                 <h2 class="centerText">About Me</h2>
                 <tbody>
                     {{#each about}}
-                        <tr>
+                        <tr class="fontSize">
                             <td>{{title}}</td>
                             <td>{{description}}</td>
                             <td>
-                                <a href="/about/update/{{id}}" type="button">Edit</a>
-                                <a href="/about/delete/{{id}}" type="button">Delete</a>
+                                <form method = "post" action="/about/delete/{{id}}">
+                                    <a href="/about/update/{{id}}" type="button">Edit</a>
+                                    <input class="delete" type="submit" value="Delete">
+                                </form>
                             </td>
                         </tr>
                     {{/each}}
@@ -32,7 +34,9 @@
     </div>
         <div>
             {{#each skills}}
-                <a href="/skills/delete/{{id}}"><button class = "buttonContainer delete" type="button">{{name}} ✖</button></a>
+                <form class="skillContainer" method = "post" action="/skills/delete/{{id}}">
+                    <button class = "buttonContainer deleteSkill" type="submit">{{name}} ✖</button>
+                </form>
             {{/each}}
         </div>
         {{else}}

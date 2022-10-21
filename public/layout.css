@@ -27,6 +27,7 @@ header{
   cursor: pointer;
   margin-right: auto;
   font-size:xx-large;
+  border: 0;
 }
 
 .nav_bar li{
@@ -80,6 +81,14 @@ ul{
   row-gap: 20px;
 }
 
+.delete{
+  border: 0;
+}
+
+.delete:hover{
+  cursor: pointer;
+}
+
 button{
   padding: 9px 25px;
   font-size: 20px;
@@ -94,13 +103,16 @@ button:hover{
   background-color: rgba(39, 179, 106,0.6);
 }
 
-.delete {
+.deleteSkill {
   background-color: rgba(76, 170, 250);
 }
-.delete:hover{
+.deleteSkill:hover{
   background-color: red;
 }
 
+.skillContainer {
+  display: inline;
+}
 .skill {
   color: rgba(76, 217, 198);
 }
@@ -148,7 +160,7 @@ button:hover{
   margin-top: 100px;
 }
 
-input,textarea{
+input[type=text],textarea{
   width: 100%;
 }
 
