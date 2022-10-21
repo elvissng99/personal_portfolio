@@ -114,7 +114,7 @@ exports.home_admin = (req,res)=>{
             connection.query('SELECT * FROM home;',(err, home)=>{
                 connection.release()
                 if(!err){
-                    res.render('home_admin',{home})
+                    res.render('homeAdmin',{home})
                 }else{
                     res.render('error')
                 }
@@ -133,7 +133,7 @@ exports.experiences_admin = (req,res)=>{
             connection.query('SELECT * FROM experiences;',(err, experiences)=>{
                 connection.release()
                 if(!err){
-                    res.render('experiences_admin',{experiences})
+                    res.render('experiencesAdmin',{experiences})
                 }else{
                     res.render('error')
                 }
@@ -154,7 +154,7 @@ exports.about_admin = (req,res)=>{
                     connection.query('SELECT * FROM skills;',(err, skills)=>{
                         connection.release()
                         if(!err){
-                            res.render('about_admin',{about, skills})
+                            res.render('aboutAdmin',{about, skills})
                         }else{
                             res.render('error')
                         }

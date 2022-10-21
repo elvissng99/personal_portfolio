@@ -48,7 +48,7 @@ exports.update = (req,res)=>{
                         connection.query('SELECT * FROM home;',(err, home)=>{
                             connection.release()
                             if(!err){
-                                res.render('home_admin',{home, isSuccessful:true})
+                                res.render('homeAdmin',{home, isSuccessful:true})
                             }else{
                                 res.render('error')
                             }
@@ -59,7 +59,7 @@ exports.update = (req,res)=>{
                 })
             })
         }else{
-            res.render('home_admin',{
+            res.render('homeAdmin',{
                 home:[{
                     introduction,
                     name,
