@@ -1,9 +1,11 @@
 <header>
     {{!-- <img class="logo" src="/ES logo.jpg" alt="logo"> --}}
     {{#if session.email}}
-        <div class="logo"><a class="logo" href="/logout">𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌</a></div>
+        <form class="logo" method = "post" action="/logout">
+            <input class="logo" type="submit" value="𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌">
+        </form>
     {{else}}
-        <div class="logo"><a class="logo" href="/login">𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌</a></div>
+        <div class="logo"><a class="logo" href="/login">𝕰𝖑𝖛𝖎𝖘 𝕾𝖓𝖌</a></div>     
     {{/if}}
     <nav>
         <ul class = 'nav_bar'>

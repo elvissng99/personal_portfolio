@@ -8,9 +8,11 @@
                 <tr>
                     <td class="fontSize">{{title}}</td>
                     <td class="fontSize">
-                        <a href="/experiences/read/{{id}}" type="button">View</a>
-                        <a href="/experiences/update/{{id}}" type="button">Edit</a>
-                        <a href="/experiences/delete/{{id}}" type="button">Delete</a>
+                        <form method = "post" action="/experiences/delete/{{id}}">
+                            <a href="/experiences/read/{{id}}" type="button">View</a>
+                            <a href="/experiences/update/{{id}}" type="button">Edit</a>
+                            <input class="delete" type="submit" value="Delete">
+                        </form>
                     </td>
                 </tr>
                 {{/each}}

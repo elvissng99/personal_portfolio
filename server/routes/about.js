@@ -6,10 +6,10 @@ router.get('/about/create',aboutController.create_form)
 router.post('/about/create',aboutController.create)
 router.get("/about/update/:id",aboutController.update_form)
 router.post("/about/update/:id",aboutController.update)
-router.get('/about/delete/:id',aboutController.delete)
+router.post('/about/delete/:id',aboutController.delete)
 
 router.post('/about/admin',aboutController.createSkill)
-router.get('/skills/delete/:id',aboutController.deleteSkill)
+router.post('/skills/delete/:id',aboutController.deleteSkill)
 
 
 module.exports = router
