@@ -114,7 +114,7 @@ exports.home_admin = (req,res)=>{
             connection.query('SELECT * FROM home;',(err, home)=>{
                 connection.release()
                 if(!err){
-                    res.render('home_admin',{home})
+                    res.render('homeAdmin',{home})
                 }else{
                     res.render('error')
                 }
