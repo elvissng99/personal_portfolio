@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2022 at 04:23 PM
+-- Generation Time: Oct 21, 2022 at 04:14 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -58,7 +58,7 @@ CREATE TABLE `experiences` (
 --
 
 INSERT INTO `experiences` (`id`, `title`, `description`) VALUES
-(1, 'vCargoCloud', 'Frontend Development with ReactNative!!'),
+(1, 'vCargoCloud', 'Frontend Development with ReactNative'),
 (2, 'GUUD', 'Algorithm design and development for route optimisation');
 
 -- --------------------------------------------------------
@@ -80,7 +80,7 @@ CREATE TABLE `home` (
 --
 
 INSERT INTO `home` (`id`, `introduction`, `employment`, `description`, `name`) VALUES
-(1, 'Hi, my name is', 'Aspiring Software Engineer', 'I am currently a student in Nanyang Technological University. Still on a journey to find out my true passion in Computer Science', 'Elvis Sng');
+(1, 'Hi, my name is', 'Computer Science Student in Nanyang Technological University', 'I am an aspiring software engineer who is still on a journey to find out my true passion in Computer Science', 'Elvis Sng');
 
 -- --------------------------------------------------------
 
@@ -147,13 +147,13 @@ ALTER TABLE `skills`
 -- AUTO_INCREMENT for table `about`
 --
 ALTER TABLE `about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `experiences`
 --
 ALTER TABLE `experiences`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `home`
@@ -165,7 +165,7 @@ ALTER TABLE `home`
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
